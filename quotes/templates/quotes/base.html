@@ -1,24 +1,33 @@
+<!-- quotes/templates/quotes/base.html -->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Famous Scientists</title>
+
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
 
-    <header>
+    <header class = "main-page">
         <div class="container">
             <h1 class="logo">Famous Scientists</h1>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">Show All</a></li>
-                    <li><a href="#services">About</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/quote">New Scientist</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/show_all">Show All</a></li>
+
                 </ul>
             </nav>
         </div>
     </header>
+
+    {% block content %}
+        <!-- fill in this section with specific page detail -->
+    {% endblock %}
     
 </body>
 </html>

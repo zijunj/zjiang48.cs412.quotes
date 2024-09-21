@@ -1,29 +1,26 @@
 <!-- quotes/templates/quotes/about.html -->
-<html lang="en">
+{% extends 'quotes/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Famous Scientists</title>
-    <link rel="stylesheet" href="/static/styles.css">
-</head>
-
-<body>
-    <section class="about">
-        <div class="container">
-            <h2>About Albert Einstein</h2>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Albert_Einstein_1921.jpg"
-                alt="Albert Einstein" class="profile-img">
-            <p>Albert Einstein was a theoretical physicist who developed the theory of relativity, one of the two
-                pillars of modern physics (alongside quantum mechanics). His work is also known for its influence on the
-                philosophy of science.</p>
-            <p>Born on March 14, 1879, in Ulm, Germany, Einstein's most famous equation is E=mc², which expresses the
-                idea that mass and energy are interchangeable. He was awarded the Nobel Prize in Physics in 1921 for his
-                explanation of the photoelectric effect.</p>
-            <p>Beyond his scientific contributions, Einstein was known for his philosophical views on life, his advocacy
-                for civil rights, and his outspoken pacifism.</p>
+{% block content %}
+<section class="biography">
+    <div class="container2">
+        <header>
+            <h1>{{name}}</h1>
+        </header>
+        <div class="content">
+            <div class="image">
+                <img src={{aboutImg}} alt="{{name}}">
+            </div>
+            <div class="about">
+                <h2>About</h2>
+                {{pElems}}
+                <p class="creator">Created by: Zi Jun Jiang</p>
+            </div>
         </div>
-    </section>
-</body>
+    </div>
+</section>
 
-</html>
+
+{% endblock %}
+    
+

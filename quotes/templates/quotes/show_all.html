@@ -1,0 +1,65 @@
+<!-- quotes/templates/quotes/show_all.html -->
+
+{% extends 'quotes/base.html' %}
+
+{% block content %}
+<section class="biography">
+    <div class="container2">
+        <header>
+            <h1>{{name.0}}</h1>
+        </header>
+        <div class="content">
+            <div class="image">
+                <img src={{aboutImg.0}} alt="{{name.0}}">
+            </div>
+            <div class="about">
+                <h2>About</h2>
+                {{pElems.0}}
+                <h2>Quote</h2>
+                <p>"{{quote.0}}"</p>
+                <cite>-{{name.0}}</cite>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="biography">
+    <div class="container2">
+        <header>
+            <h1>{{name.1}}</h1>
+        </header>
+        <div class="content">
+            <div class="image">
+                <img src={{aboutImg.1}} alt="{{name.1}}">
+            </div>
+            <div class="about">
+                <h2>About</h2>
+                {{pElems.1}}
+                <h2>Quote</h2>
+                <p>"{{quote.1}}"</p>
+                <cite>-{{name.1}}</cite>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="biography">
+    <div class="container2">
+        <header>
+            <h1>{{name.2}}</h1>
+        </header>
+        <div class="content">
+            <div class="image">
+                <img src={{aboutImg.2}} alt="{{name.2}}">
+            </div>
+            <div class="about">
+                <h2>About</h2>
+                {{pElems.2}}
+                <h2>Quote</h2>
+                <p>"{{quote.2}}"</p>
+                <cite>-{{name.2}}</cite>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
