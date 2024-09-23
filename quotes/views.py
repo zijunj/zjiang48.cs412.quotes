@@ -5,6 +5,7 @@ from django.utils.safestring import mark_safe
 import time
 import random
 
+# lists for randomint
 quotes = ["We cannot solve our problems with the same thinking we used when we created them.", "Tact is the art of making a point without making an enemy.", "A man who dares to waste one hour of time has not discovered the value of life."]
 names = ["Albert Einstein", "Sir Issac Newton", "Charles Darwin"]
 img = ["/static/img/albert_einstein.jpg","/static/img/issac_newton.jpg","/static/img/charles_darwin.jpg"]
