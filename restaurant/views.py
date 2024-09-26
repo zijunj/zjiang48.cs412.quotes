@@ -22,7 +22,7 @@ def base_page_view(request):
     return render(request, template_name)
 def order_page_view(request):
     '''
-    Show order page
+    Show order page, picks a random daily special order
     '''
     template_name = 'restaurant/order.html'
     context = {
@@ -54,13 +54,12 @@ def confirmation(request):
         
         # item string
         items = ""
-        # Subtotal price
+        # Subtotal and total price
         subtotal = 0
+        total = 0
         
         # Read menu items and add to total
-        
-        num = 0
-                
+                        
         for key, value in request.POST.items():
             if key == 'chicken_alfredo':
                 items += "<li>Chicken Alfredo - $19.99 </li>" 
@@ -85,10 +84,7 @@ def confirmation(request):
                 subtotal += 8.99
             if key == 'soup':
                 items += "<li>Soup - Free!</li>" 
-           
 
-        
-    
             
         subtotal = round(subtotal,2)
 
@@ -96,7 +92,7 @@ def confirmation(request):
         tax = round(subtotal * 0.0625, 2)
         
         # Total
-        total = subtotal + tax
+        total = round(subtotal + tax, 2)
         
         # read the customer data into python variables
         special_instructions = request.POST['special_instructions']
