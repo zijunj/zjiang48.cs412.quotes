@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.utils.safestring import mark_safe
 
 import time
+from datetime import datetime, timedelta
+
 import random
 
 
@@ -34,7 +36,6 @@ def submit(request):
     
     # check that we have a POST request
     if request.POST:
-        
         
         # item string
         items = ""
@@ -71,6 +72,9 @@ def submit(request):
         name = request.POST['name']
         phone = request.POST['phone']
         email = request.POST['email']
+
+        # random arrival time from 30min - 60 mins
+        
         
         # package the form data up as context variables for the template
         context = {
