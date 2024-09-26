@@ -1,0 +1,23 @@
+<!-- restaurant/templates/restaurant/main.html -->
+
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+
+<div class="video-container">
+     <video autoplay muted loop id="background-video">
+      <source src="/static/olivegarden_video.mp4" type="video/mp4">
+    </video> 
+    <div class="content">
+        <h1>Welcome to Italian Delight</h1>
+        <p>Experience the taste of Italy</p>
+        <a href="{% url 'order' %}" class="cta-button">Order Now</a>
+    </div>
+</div>  
+
+<!-- <main class="main-content">
+    <h2>Our Specialties</h2>
+    <p>Enjoy our wide selection of authentic Italian dishes, from classic pasta to delicious desserts. Our recipes are inspired by traditional Italian cuisine, prepared with the freshest ingredients to bring you the true flavors of Italy.</p>
+</main> -->
+
+{% endblock %}

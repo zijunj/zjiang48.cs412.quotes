@@ -15,7 +15,7 @@ imgRandom = img[randInt]
 
 
 def home_page_view(request):
-  template_name = 'quotes/quote.html'
+  template_name = 'quotes/base.html'
 
   context = {"quote": quoteRandom,
                "img": imgRandom,

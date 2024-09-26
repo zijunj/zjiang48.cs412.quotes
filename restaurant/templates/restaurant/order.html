@@ -1,0 +1,100 @@
+<!-- restaurant/templates/restaurant/order.html -->
+
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<main class="order-main">
+    <h1>Order Online</h1>
+    <form action="{% url 'submit' %}" method="POST">
+        {% csrf_token %}
+
+        <div class="order-container">
+            <div class="menu-section">
+                <h2>Menu</h2>
+                <div class="menu-item">
+                    <img src="/static/img/chicken_alfredo.png" alt="chicken_alfredo">
+                    <h3>Chicken Alfredo - Daily Special!</h3>
+                    <p>Our signature pasta dish with homemade Alfredo sauce</p>
+                    <div class="button-group">
+                        <button class="add-to-cart" type="button" ><input type="checkbox" name="chicken_alfredo"> Add to Cart - $20.99</button>
+                        <button class="add-options" type="button" ><input type="checkbox" name="soup"> Add Soup - Free</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="/static/img/chicken_scampi.png" alt="chicken_scampi">
+                    <h3>Chicken Scampi</h3>
+                    <p>Chicken sautéed with fresh bell peppers and red onions in a creamy scampi sauce. Served over
+                        angel hair pasta.</p>
+                    <div class="button-group">
+                        <button class="add-to-cart" type="button" > <input type="checkbox" name="chicken_scampi"> Add to Cart - $21.49</button>
+                        <button class="add-options" type="button" > <input type="checkbox" name="soup"> Add Soup - Free</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="/static/img/chicken_parm.png" alt="chicken_parm">
+                    <h3>Chicken Parmigiana</h3>
+                    <p>Two lightly fried parmesan-breaded chicken breasts with our homemade marinara and melted Italian
+                        cheeses. Served with a side of spaghetti.</p>
+                    <div class="button-group">
+                        <button class="add-to-cart" type="button" > <input type="checkbox" name="chicken_parm"> Add to Cart - $20.79</button>
+                        <button class="add-options" type="button" > <input type="checkbox" name="soup"> Add Soup - Free</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="/static/img/tour_of_italy.png" alt="tour_of_italy">
+                    <h3>Tour of Italy</h3>
+                    <p>A combination of our chicken parmigiana, fettuccine Alfredo, and lasagna classico</p>
+                    <div class="button-group">
+                        <button class="add-to-cart" type="button" > <input type="checkbox" name="tour_of_italy"> Add to Cart - $22.99</button>
+                        <button class="add-options" type="button" > <input type="checkbox" name="soup"> Add Soup - Free</button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="/static/img/house_salad.png" alt="house_salad">
+                    <h3>House Salad</h3>
+                    <p>Fresh greens with our famous Italian dressing</p>
+                    <div class="button-group">
+                        <button class="add-to-cart" type="button" ><input type="checkbox" name="house_salad"> Add to Cart - $8.99</button>
+                        <button class="add-options" type="button" > <input type="checkbox" name="soup"> Add Soup - Free</button>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- Add more menu items as needed -->
+            <div class="cart-section">
+                <h2>Special Instructions</h2>
+                Please share any special instructions:
+                <div>
+                    <textarea name="special_instructions" rows="5" cols="40 "></textarea>
+                </div>
+                <h2>Customer Information</h2>
+                Name:
+                <div>
+                    <textarea name="name" rows="1" cols="40 "></textarea>
+                </div>
+                Phone:
+                <div>
+                    <textarea name="phone" rows="1" cols="40 "></textarea>
+                </div>
+                Email:
+                <div>
+                    <textarea name="email" rows="1" cols="40 "></textarea>
+                </div>
+                <div id="cart-items">
+
+                    <!-- Cart items will be dynamically added here -->
+                </div>
+                <div class="cart-total">
+                    <br>
+                    <button class="checkout-btn" type="submit">Checkout</button> 
+                </div>
+            </div>
+        </div>
+    </form>
+
+    
+
+</main>
+
+{% endblock %}

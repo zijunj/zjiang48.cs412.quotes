@@ -1,0 +1,55 @@
+<!-- restaurant/templates/restaurant/base.html -->
+{% load static %}
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olive Garden</title>
+
+
+  <link rel="stylesheet" href="{% static 'styles2.css' %}">
+  <link rel="icon" href="https://download.logo.wine/logo/Olive_Garden/Olive_Garden-Logo.wine.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <img src="https://download.logo.wine/logo/Olive_Garden/Olive_Garden-Logo.wine.png" alt="Olive Garden Logo">
+    </div>
+
+    <h1>🍝</h1>
+
+        <ul class="nav-links">
+          <li><a href="{% url 'main' %}">Home</a></li>
+        </ul>
+        <div class="nav-buttons">
+          <a href="{% url 'order' %}"><button class="btn btn-primary">Order Now</button></a>
+        </div>
+
+    <h1>🍝</h1>
+
+    <div class="logo">
+        <img src="https://download.logo.wine/logo/Olive_Garden/Olive_Garden-Logo.wine.png"
+              alt="Olive Garden Logo">
+     </div>
+
+  </nav>
+
+  {% block content %}
+  <!-- fill in this section with specific page detail -->
+  {% endblock %}
+
+  <footer>
+    <p>
+      Page created by Zi Jun Jiang <br>
+      Generated at: {{time}}
+    </p>
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!-- restaurant/templates/restaurant/confirmation.html -->
+
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div class="confirmation_container">
+    <header>
+        <img src="https://download.logo.wine/logo/Olive_Garden/Olive_Garden-Logo.wine.png" alt="Olive Garden Logo" width="200">
+        <h1>Grazie! Your Order is Confirmed</h1>
+    </header>
+    
+    <section class="order-summary">
+        <h2>Order Summary</h2>
+        <p><strong>Name:</strong> {{name}}</p>
+        <p><strong>Phone:</strong> {{phone}}</p>
+        <p><strong>Email:</strong> {{email}}</p>
+        <p><strong>Order Number:</strong> #123456</p>
+        <p><strong>Estimated Pickup Time:</strong> Today at 7:30 PM</p>
+        <h3>Your Items:</h3>
+        <ul>
+            {{items}}
+        </ul>
+        <p><strong>Subtotal:</strong> {{subtotal}}</p>
+        <p><strong>Tax:</strong> {{tax}}</p>
+        <p><strong>Total:</strong> {{total}}</p>
+    </section>
+    
+    <p>Your order will be ready for pickup at our <strong>123 Main St, Springfield</strong> location.</p>
+    
+    <p>Remember to bring your order number with you. We can't wait to serve you!</p>
+    
+    <a href="{% url 'order' %}" class="btn">Modify Order</a>
+    
+    <footer>
+        <p>"When you're here, you're family."</p>
+    </footer>
+</div>
+{% endblock %}
