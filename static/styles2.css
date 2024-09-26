@@ -239,7 +239,7 @@ body {
     margin-bottom: 20px;
 }
 .confirmation_container h1 {
-    color: #7c2529;
+    color: #006633;
 }
 .order-summary {
     background-color: #f9f7f0;
@@ -249,7 +249,7 @@ body {
 }
 .confirmation_container .btn {
     display: inline-block;
-    background-color: #7c2529;
+    background-color: #006633;
     color: #fff;
     padding: 10px 20px;
     text-decoration: none;

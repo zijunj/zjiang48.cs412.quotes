@@ -5,20 +5,21 @@
 {% block content %}
 <main class="order-main">
     <h1>Order Online</h1>
-    <form action="{% url 'submit' %}" method="POST">
+    <form action="{% url 'confirmation' %}" method="POST">
         {% csrf_token %}
 
         <div class="order-container">
             <div class="menu-section">
                 <h2>Menu</h2>
                 <div class="menu-item">
-                    <img src="/static/img/chicken_alfredo.png" alt="chicken_alfredo">
+                    {{daily_special}}
+                    <!-- <img src="/static/img/chicken_alfredo.png" alt="chicken_alfredo">
                     <h3>Chicken Alfredo - Daily Special!</h3>
                     <p>Our signature pasta dish with homemade Alfredo sauce</p>
                     <div class="button-group">
                         <button class="add-to-cart" type="button" ><input type="checkbox" name="chicken_alfredo"> Add to Cart - $20.99</button>
                         <button class="add-options" type="button" ><input type="checkbox" name="soup"> Add Soup - Free</button>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="menu-item">
                     <img src="/static/img/chicken_scampi.png" alt="chicken_scampi">
