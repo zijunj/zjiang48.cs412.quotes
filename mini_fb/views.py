@@ -13,6 +13,6 @@ class ShowAllProfilesView(ListView):
     '''the view to show all Profiles'''
 
     model = Profile # the model to display
-    template_name = 'mini_fb/show_all.html'
+    template_name = 'mini_fb/show_all_profiles.html'
     context_object_name = 'profiles' # context variable to use in the template
     
