@@ -1,0 +1,23 @@
+<!-- mini_fb/templates/mini_fb/base.html 
+ A template with common HTML code that will be re-used by 
+ all of the other templates.
+ -->
+
+ {% load static %}
+<html>
+    <head>
+        <title>Mini Facebook</title>
+        <link rel="stylesheet" href="{% static 'styles-mini_fb.css' %}">
+    </head>
+
+    <body>
+        <header>
+            <h1>Mini Facebook</h1>
+        </header>
+
+        {% block content %}
+        <!-- fill in this section with specific page detail -->
+        {% endblock %}
+
+    </body>
+</html>
