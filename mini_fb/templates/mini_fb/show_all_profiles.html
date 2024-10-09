@@ -1,20 +1,15 @@
 {% extends 'mini_fb/base.html' %}
 {% comment %}mini_fb/templates/mini_fb/show_all.html{% endcomment %}
 
-<!-- display a context variable called articles -->
-
-<!-- {{articles}} -->
-
 {% block content %}
-
-  <main class="profile-container">
+  <main class="all-profile-container">
     <!-- loop to display each Article -->
     {% for p in profiles %}
       <div class="profile-card">
-        <img src="{{ p.image_url }}" alt="{{ p.image_url }}" class="profile-picture" />
-        <h2 class="profile-name">{{ p.first_name }} {{ p.last_name }}</h2>
-        <p class="profile-info">{{ p.email_address }}</p>
-        <p class="profile-info">{{ p.city }}</p>
+        <a href="{% url 'show_profile' p.pk %}"><img src="{{ p.image_url }}" alt="{{ p.image_url }}" class="all-profile-picture" style="text-decoration:none;" /></a>
+        <h2 class="all-profile-name"><a href="{% url 'show_profile' p.pk %}" style="text-decoration:none;">{{ p.first_name }} {{ p.last_name }}</a></h2>
+        <p class="all-profile-info">{{ p.email_address }}</p>
+        <p class="all-profile-info">{{ p.city }}</p>
       </div>
     {% endfor %}
   </main>

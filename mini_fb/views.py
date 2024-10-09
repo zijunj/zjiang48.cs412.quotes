@@ -4,7 +4,7 @@
 # functions to connect urls to the correct templates
 from django.shortcuts import render
 
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .models import * ## import the models (e.g., Profile)
 
 # Create your views here.
@@ -15,4 +15,12 @@ class ShowAllProfilesView(ListView):
     model = Profile # the model to display
     template_name = 'mini_fb/show_all_profiles.html'
     context_object_name = 'profiles' # context variable to use in the template
+    
+class ShowProfilePageView(DetailView):
+    '''the view to show one Profile'''
+
+    model = Profile # the model to display
+    template_name = 'mini_fb/show_profile_page.html'
+    context_object_name = 'profile' # context variable to use in the template
+    
     

@@ -1,0 +1,31 @@
+{% extends 'mini_fb/base.html' %}
+{% comment %}mini_fb/templates/mini_fb/show_profile_page.html{% endcomment %}
+
+
+{% block content %}
+
+  <div class="profile-container">
+    <div class="profile-header">
+        <img src="{{profile.image_url}}" alt="Profile Picture" class="profile-picture">
+        <div class="profile-info">
+            <h2 class="profile-name">{{profile.first_name}} {{profile.last_name}}</h2>
+            <div class="profile-details">
+                <p>📧 Email: {{profile.email_address}}</p>
+                <p>📍 City: {{profile.city}}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="status-updates">
+      {% if profile.get_status_messages %}
+        {% for s in profile.get_status_messages %}
+        <div class="status-update">
+            <p>{{s.message}}</p>
+            <div class="status-time">{{s.timestamp}}</div>
+        </div>
+        {% endfor %}
+      {% else %}
+            <h2>No Comments</h2>
+        {% endif %}
+    </div>
+{% endblock %}
