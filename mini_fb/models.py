@@ -4,6 +4,10 @@
 # to input data attributes for the Profile of each user.
 
 from django.db import models
+from django.shortcuts import render
+from django.urls import reverse
+from typing import Any
+
 
 # Create your models here.
 class Profile(models.Model):
@@ -30,6 +34,12 @@ class Profile(models.Model):
         
         return status_messages
 
+    def get_absolute_url(self):
+        # profile = Profile.objects.get(pk=self.kwargs['pk'])
+        profile = Profile.objects.get(pk=self.pk)
+        return reverse('profile', kwargs={'pk':profile.pk})
+        
+        # return reverse('profile', kwargs=self.kwargs)
     
 class StatusMessage(models.Model):
     '''Models the data attributes of individual Facebook users.'''
