@@ -139,3 +139,73 @@ h1 {
 
 /*  End show_profile_page.html css */
 
+/*  Start create_status_form.html css */
+
+.status-container {
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 750px;
+}
+
+.status-container h2 {
+    color: #1877f2;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.create {
+    background-color: #1877f2;
+    color: white;
+}
+
+.cancel {
+    background-color: #e4e6eb;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/*  End create_status_form.html css */
+
+/*  Start create_profile_form.html css */
+
+.form-container {
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 500px;
+}
+
+.form-container h2 {
+    color: #1877f2;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.form-container p {
+    color: #606770;
+    font-size: 20px;
+}
+
+
+
+
+
+/*  End create_profile_form.html css */
+

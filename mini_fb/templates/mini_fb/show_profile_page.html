@@ -12,6 +12,7 @@
             <div class="profile-details">
                 <p>📧 Email: {{profile.email_address}}</p>
                 <p>📍 City: {{profile.city}}</p>
+                <p><a href="{% url 'create_status' profile.pk %}" style="text-decoration:none;">Create Status</a></p>
             </div>
         </div>
     </div>

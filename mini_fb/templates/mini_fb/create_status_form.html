@@ -1,0 +1,32 @@
+{% extends 'mini_fb/base.html' %}
+{% comment %} mini_fb/templates/mini_fb/create_status_form.html {% endcomment %}
+
+{% block content %}
+
+<div class="status-container">
+
+    <h2>Post a status message for {{profile.first_name}} {{profile.last_name}}</h2>
+
+    <form method="POST">
+    {% csrf_token %}
+
+    <table>
+        <!-- display form as a table -->
+        {{form.as_table}}
+
+        <tr>
+            <td></td>
+            <td>
+                    <button type="submit" class="btn create" name="Create Status">Create Status </button>
+                    {% comment %} <input type="submit" name="submit" value="Create Status"> {% endcomment %}
+                <!-- NOTE: the cancel button is its own form!!!! -->
+                <form action="{% url 'profile' profile.pk%}">
+                    <button type="submit" class="btn cancel" name="Cancel">Cancel</button>
+                    {% comment %} <input type="submit" name="Cancel" value="Cancel"> {% endcomment %}
+                </form>
+            </td>
+        </tr>
+    </table>
+
+</div>
+{% endblock %}
