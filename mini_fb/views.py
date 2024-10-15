@@ -24,7 +24,7 @@ class ShowProfilePageView(DetailView):
     '''the view to show one Profile'''
 
     model = Profile # the model to display
-    template_name = 'mini_fb/show_profile_page.html'
+    template_name = 'mini_fb/show_profile.html'
     context_object_name = 'profile' # context variable to use in the template
     
 class CreateProfileView(CreateView):
