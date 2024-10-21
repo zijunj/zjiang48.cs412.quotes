@@ -1,0 +1,35 @@
+{% extends 'mini_fb/base.html' %}
+{% comment %}mini_fb/templates/mini_fb/delete_status_form.html{% endcomment %}
+
+
+{% block content %}
+<div class ="form-container">
+    <h2 style="text-align: left;">Delete Status Message?</h2>
+  
+    <div class="status-messages">
+        <p>{{ status_message.message }} <br></p>
+
+        {% if status_message.get_images %}
+
+            {% for image in status_message.get_images %}
+                <img src="{{image.image.url}}" alt="image.image.url" style="max-width: 500px; max-height: 500px;">
+            {% endfor %}
+
+        {% endif %}
+
+        <p><strong>{{ status_message.timestamp}}</strong></p>
+    
+    </div>  
+
+    <h3 style="text-align: left;" >Are you sure you want to delete this status message?</h3>
+    <form method="POST" style="display: inline;">
+        {% csrf_token %}
+        <input type="submit" class="form-button" name="Yes" value="Yes">
+    </form>
+    <form method="GET" action="{% url 'profile' status_message.profile.id %}" style="display: inline;">
+        <input type="submit" class="form-button" name="No" value="No">
+    </form>
+</div>
+
+
+{% endblock %}

@@ -35,11 +35,11 @@ class Profile(models.Model):
         return status_messages
 
     def get_absolute_url(self):
-        # profile = Profile.objects.get(pk=self.kwargs['pk'])
+        '''Return the URL that will display an instance of this object'''
+        
         profile = Profile.objects.get(pk=self.pk)
         return reverse('profile', kwargs={'pk':profile.pk})
         
-        # return reverse('profile', kwargs=self.kwargs)
     
 class StatusMessage(models.Model):
     '''Models the data attributes of individual Facebook users.'''
@@ -48,9 +48,30 @@ class StatusMessage(models.Model):
     timestamp = models.DateField(auto_now=True)
     message = models.TextField(blank=False)
     profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
-
     
     def __str__(self):
         '''Return a string representation of this object.'''
 
         return f'{self.profile}: {self.message}'
+    
+    def get_images(self):
+        '''Get the images for each status message'''
+        
+        # retrieve all of the images for the correct Profile and sort by newest first
+        image = Image.objects.filter(status=self)
+        
+        return image
+    
+class Image(models.Model):
+    '''Models the data attributes of the images'''
+    
+    # data attributes of an Facebook Image:
+    timestamp = models.DateField(auto_now=True)
+    image = models.ImageField(blank=True)
+    status = models.ForeignKey("StatusMessage", on_delete=models.CASCADE)
+
+    
+    def __str__(self):
+        '''Return a string representation of this object.'''
+
+        return f'image for {self.status}'

@@ -204,8 +204,23 @@ h1 {
 }
 
 
-
-
-
 /*  End create_profile_form.html css */
 
+.status-messages {
+    margin-top: 20px;
+    padding: 15px;
+    margin-bottom: 40px; 
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.update {
+    margin-top: 20px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    background-color: #1877f2;
+    color: white;
+}

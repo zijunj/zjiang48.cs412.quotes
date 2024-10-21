@@ -7,7 +7,7 @@
 
     <h2>Post a status message for {{profile.first_name}} {{profile.last_name}}</h2>
 
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
     <table>
@@ -16,13 +16,14 @@
 
         <tr>
             <td></td>
-            <td>
-                    <button type="submit" class="btn create" name="Create Status">Create Status </button>
-                    {% comment %} <input type="submit" name="submit" value="Create Status"> {% endcomment %}
+            <td>    
+                <input type="file" name = "files" multiple /> <br>
+                <button type="submit" class="btn create" name="Create Status">Create Status </button>
+        </form>
+
                 <!-- NOTE: the cancel button is its own form!!!! -->
-                <form action="{% url 'profile' profile.pk%}">
+                <form action="{% url 'create_status' profile.pk%}">
                     <button type="submit" class="btn cancel" name="Cancel">Cancel</button>
-                    {% comment %} <input type="submit" name="Cancel" value="Cancel"> {% endcomment %}
                 </form>
             </td>
         </tr>

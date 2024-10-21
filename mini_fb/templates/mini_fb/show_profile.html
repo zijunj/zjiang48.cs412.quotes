@@ -13,20 +13,30 @@
                 <p>📧 Email: {{profile.email_address}}</p>
                 <p>📍 City: {{profile.city}}</p>
                 <p><a href="{% url 'create_status' profile.pk %}" style="text-decoration:none;">Create Status</a></p>
+                <p><a href="{% url 'update_profile' profile.pk %}" style="text-decoration:none;">Update Profile</a></p>
             </div>
         </div>
     </div>
     
     <div class="status-updates">
-      {% if profile.get_status_messages %}
-        {% for s in profile.get_status_messages %}
-        <div class="status-update">
-            <p>{{s.message}}</p>
-            <div class="status-time">{{s.timestamp}}</div>
-        </div>
-        {% endfor %}
-      {% else %}
-            <h2>No Comments</h2>
-        {% endif %}
+        {% if profile.get_status_messages %}
+            {% for s in profile.get_status_messages %}
+            <div class="status-update">
+                <p>{{s.message}}</p>
+                {% if s.get_images %}  
+                    {% for image in s.get_images %}
+                        <img src = '{{image.image.url}}' alt='image.image.url' style="max-width: 500px; max-height: 500px;">
+                    {% endfor %}
+                {% endif %}
+                <div class="status-time">{{s.timestamp}}</div><br>
+                <a href="{% url 'update_status' s.pk %}" class="update" style="text-decoration:none;"> Update Status</a>
+                <a href="{% url 'delete_status' s.pk %}" class = "update" style="text-decoration:none;"> Delete</a>
+
+
+            </div>
+            {% endfor %}
+        {% else %}
+                <h2>No Status Messages</h2>
+            {% endif %}
     </div>
 {% endblock %}

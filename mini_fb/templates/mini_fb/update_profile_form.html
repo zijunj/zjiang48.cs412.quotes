@@ -1,0 +1,31 @@
+{% extends 'mini_fb/base.html' %}
+{% comment %}mini_fb/templates/mini_fb/update_profile_page.html{% endcomment %}
+
+
+{% block content %}
+<div class ="form-container">
+    <h2>Update {{profile.first_name}}'s Profile</h2>
+    <p>Fill in the form to update the new profile</p>
+
+    <form method="POST">
+    {% csrf_token %}
+
+    <table>
+        <!-- display form as a table -->
+        {{form.as_table}}
+
+        <tr>
+            <td></td>
+            <td><button type="submit" class="btn create" name="Create Profile">Update Profile</button>
+            </form>
+            <!-- NOTE: the cancel button is its own form!!!! -->
+                <form action="{% url 'profile' profile.pk %}">
+                    <button type="submit" class="btn cancel" name="Cancel">Cancel</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+{% endblock %}

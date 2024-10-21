@@ -1,0 +1,19 @@
+{% extends 'mini_fb/base.html' %}
+{% comment %}mini_fb/templates/mini_fb/update_profile_page.html{% endcomment %}
+
+
+{% block content %}
+<div class="form-container">
+    <h2>Update Status Message</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn create" name="Update Profile">Update Profile</button>
+    </form>
+    <form method="GET" action="{% url 'profile' status_message.profile.id %}">
+        <button type="submit" class="btn cancel" name="Cancel">Cancel</button>
+    </form>
+</div>
+
+
+{% endblock %}
