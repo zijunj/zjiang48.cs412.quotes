@@ -75,3 +75,16 @@ class Image(models.Model):
         '''Return a string representation of this object.'''
 
         return f'image for {self.status}'
+    
+class Friend(models.Model):
+    '''Models the data attributes of a Friend'''
+
+    # data attributes of an Facebook Friend:
+    profile1 = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="profile1")
+    profile2 = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="profile2")
+    timestamp = models.DateField(auto_now=True)
+
+    def __str__(self):
+        '''Return a string representation of this object.'''
+
+        return f'{self.profile1} & {self.profile2}'
