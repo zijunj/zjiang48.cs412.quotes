@@ -17,6 +17,17 @@
             </div>
         </div>
     </div>
+
+    <div class = "friend-list">
+        {% if profile.get_friends %}
+            {% for f in profile.get_friends %}
+            <div class = "friend">
+                <img src="{{f.image_url}}" alt="Profile Picture" class="profile-picture">
+            </div>
+            {% endfor %}
+        {% endif %}
+
+    </div>
     
     <div class="status-updates">
         {% if profile.get_status_messages %}

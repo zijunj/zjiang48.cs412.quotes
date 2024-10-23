@@ -39,6 +39,13 @@ class Profile(models.Model):
         
         profile = Profile.objects.get(pk=self.pk)
         return reverse('profile', kwargs={'pk':profile.pk})
+    
+    def get_friends(self):
+        '''Return's a list of friend's profiles'''
+
+        friend_list = list(Friend.objects.filter(profile1=self) | Friend.objects.filter(profile2=self))
+        return friend_list
+
         
     
 class StatusMessage(models.Model):
