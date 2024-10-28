@@ -14,15 +14,20 @@
         <header>
             <h1>Mini Facebook</h1>
             <nav class="nav-links">
-                <a href="{% url 'show_all_profiles' %}">Show All Profiles</a>
-                <a href="{% url 'create_profile' %}">Create Profile</a>
-
+                
+                {% block extra_nav_links %}
+                <!-- Block for additional nav links on specific pages -->
+                {% endblock %}
+                
             </nav>
         </header>
 
-        {% block content %}
+        <main>
+            {% block content %}
         <!-- fill in this section with specific page detail -->
         {% endblock %}
+        </main>
+
 
     </body>
 </html>

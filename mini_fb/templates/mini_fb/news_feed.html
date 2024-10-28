@@ -1,0 +1,51 @@
+{% extends 'mini_fb/base.html' %}
+{% comment %}mini_fb/templates/mini_fb/news_feed.html{% endcomment %}
+
+<!-- Navigation Bar -->
+{% block extra_nav_links %}
+<a href="{% url 'show_all_profiles' %}">All Profiles</a> 
+<a href="{% url 'profile' profile.pk %}">Profile Page</a> 
+<a href="{% url 'news_feed' profile.pk %}">News Feed</a> 
+
+{% endblock %}
+
+<!-- Body -->
+{% block content %}
+<div class = "news-feed-container">
+    <a href="{% url 'profile' profile.pk %}" class="form-button">← Back to Profile</a>
+
+    <h2 style="text-align: left;">{{ profile.first_name }} {{ profile.last_name }}'s News feed</h2>
+
+    <div class="news-feed">
+        <ul>
+        {% for status in profile.get_news_feed %}
+            <li>
+                <div class = "news-post-header">
+                    {% if status.profile.image_url %}
+                    <img src="{{status.profile.image_url}}" alt="Profile Picture" class="news-profile-pic">
+                    {% else %}
+                        No image
+                    {% endif %}
+                    <div class = "news-post-details">
+                        <span>{{status.profile.first_name}} {{status.profile.last_name}}</span>
+                        <span class="status-time">{{status.timestamp}}</span>
+                    </div>
+                </div>
+                <div class="news-post-content">
+                    <p class="news-status-message">{{ status.message }}</p>
+                    {% if status.get_images %}
+                        {% for image in status.get_images %}
+                            <img src="{{ image.image.url }}" alt="Image related to the post" class="news-post-image">
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </li>
+            
+            {% empty %}
+            <p>No Posts to show</p>
+        {% endfor %}
+        </ul>    
+    </div>
+</div>
+
+{% endblock %}

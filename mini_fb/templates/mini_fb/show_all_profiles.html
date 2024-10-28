@@ -1,6 +1,12 @@
 {% extends 'mini_fb/base.html' %}
 {% comment %}mini_fb/templates/mini_fb/show_all.html{% endcomment %}
 
+<!-- Navigation Bar -->
+{% block extra_nav_links %}
+    <a href="{% url 'create_profile' %}">Create Profile</a>
+{% endblock %}
+
+{% comment %} Body {% endcomment %}
 {% block content %}
   <main class="all-profile-container">
     <!-- loop to display each Article -->

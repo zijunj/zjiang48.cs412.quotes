@@ -6,11 +6,22 @@ body {
     background-color: #f0f2f5;
 }
 
+
 header {
     background-color: #1877f2;
     color: white;
+    padding: 20px 0;
     text-align: center;
-    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+main {
+    padding-top: 5px;
+    width: 80%;
+    margin: 100px auto 0;
 }
 
 h1 {
@@ -18,6 +29,7 @@ h1 {
 }
 
 .nav-links {
+    padding: 10px;
     margin-top: 10px;
     font-size: 18px;
 }
@@ -137,6 +149,56 @@ h1 {
     font-style: italic;
 }
 
+.friends-list {
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .friends-list h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  .friends-list h3 {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .friends-list ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+  }
+
+  .friends-list li {
+    padding-top: 20px;
+    width: 200px;
+    background-color: #ADD8E6;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .friends-list img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+
 /*  End show_profile_page.html css */
 
 /*  Start create_status_form.html css */
@@ -184,6 +246,7 @@ h1 {
 /*  Start create_profile_form.html css */
 
 .form-container {
+    margin-top: 10px;
     margin: auto;
     background-color: #fff;
     padding: 20px;
@@ -221,6 +284,116 @@ h1 {
     font-size: 12px;
     border: none;
     cursor: pointer;
-    background-color: #1877f2;
-    color: white;
+    background-color:  #ADD8E6;
+    font-weight: bold;
+    color: #4b0082;
 }
+
+
+.friend-suggestions-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+}
+
+.friend-form-button {
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin-bottom: 5px;
+    justify-content: center;
+    text-decoration: none;
+    width: 100%; 
+}
+
+.form-button {
+    background-color: #ADD8E6;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    text-decoration: none;
+    width: 175px; 
+
+}
+
+.form-button:hover {
+    background-color: #7272c4;
+}
+
+
+/* news-feed */
+.news-feed-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+}
+
+.news-feed li{
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: auto;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+.news-post-header {
+    display: flex;
+    align-items: center; /* Align vertically if needed */
+    gap: 20px; /* Space between items */
+}
+
+    .news-post-details {
+    display: flex;
+    flex-direction: column;
+    }
+  .news-feed h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  .news-feed span {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .news-profile-pic {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 2px solid #9086d2;
+    object-fit: cover;
+}
+
+  .news-feed ul {
+    gap: 20px;
+    list-style: none;
+  }
+
+
+  .news-post-image {
+    max-width: 500px;
+    max-height: 500px;
+    margin-bottom: 5px;
+    
+  }

@@ -2,12 +2,13 @@
 # Author: Zi Jun Jiang (zjiang48@bu.edu), 10/2/2024
 # Description: Controller part of MVC as this file creates 
 # functions/classes to connect urls to the correct templates
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from typing import Any
 
 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, \
+                                 View
 from .models import * ## import the models (e.g., Profile)
 from .forms import * ## import the forms (e.g., CreateProfileForm)
 
@@ -62,7 +63,6 @@ class CreateStatusMessageView(CreateView):
     
     def get_success_url(self) -> str:
         '''Return the URL to redirect to on success.'''
-       
 
         # find the Profile identified by the PK from the URL pattern
         profile = Profile.objects.get(pk=self.kwargs['pk'])
@@ -123,5 +123,35 @@ class UpdateStatusMessageView(UpdateView):
     def get_success_url(self):
         ''' redirect back to the Profile page after successful update '''
         return reverse('profile', kwargs={'pk': self.object.profile.id})
+    
+class CreateFriendView(View):
+    ''' A view to create a Friend relation between two Profile objects '''
+
+    def dispatch(self, request, *args, **kwargs):
+        # Retrieve the Profiles from the URL parameters
+        pk = self.kwargs.get('pk')
+        other_pk = self.kwargs.get('other_pk')
+        
+        # Get the profiles based on the primary keys provided
+        profile = Profile.objects.get(pk=pk)
+        other_profile = Profile.objects.get(pk=other_pk)
+
+        profile.add_friend(other_profile)
+
+        # Redirect back to the profile page of the initiating profile
+        return redirect(reverse('profile', kwargs={'pk': pk}))
+    
+class ShowFriendSuggestionsView(DetailView):
+    ''' A view to show all the friend suggestions '''
+
+    model = Profile
+    template_name = "mini_fb/friend_suggestions.html"
+    context_object_name = "profile"
+    
+class ShowNewsFeedView(DetailView):
+    ''' A view to show the newsfeed for a Profile '''
+    model = Profile
+    template_name = "mini_fb/news_feed.html"
+    context_object_name = "profile"
 
 

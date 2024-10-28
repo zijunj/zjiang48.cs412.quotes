@@ -1,6 +1,10 @@
 {% extends 'mini_fb/base.html' %}
 {% comment %}mini_fb/templates/mini_fb/show_profile_page.html{% endcomment %}
 
+{% block extra_nav_links %}
+<a href="{% url 'show_all_profiles' %}">Show All Profiles</a>
+{% endblock %}
+
 
 {% block content %}
 <div class ="form-container">

@@ -1,6 +1,10 @@
 {% extends 'mini_fb/base.html' %}
 {% comment %} mini_fb/templates/mini_fb/create_status_form.html {% endcomment %}
 
+{% block extra_nav_links %}
+<a href="{% url 'profile' profile.pk %}">Show Profile Page</a>
+{% endblock %}
+
 {% block content %}
 
 <div class="status-container">

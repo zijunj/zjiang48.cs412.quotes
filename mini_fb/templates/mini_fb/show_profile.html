@@ -1,6 +1,12 @@
 {% extends 'mini_fb/base.html' %}
 {% comment %}mini_fb/templates/mini_fb/show_profile_page.html{% endcomment %}
 
+<!-- Navigation Bar -->
+{% block extra_nav_links %}
+<a href="{% url 'show_all_profiles' %}">Show All Profiles</a>
+<a href="{% url 'profile' profile.pk %}">Show Profile Page</a>
+<a href="{% url 'news_feed' profile.pk %}">News Feed</a> 
+{% endblock %}
 
 {% block content %}
 
@@ -12,22 +18,34 @@
             <div class="profile-details">
                 <p>📧 Email: {{profile.email_address}}</p>
                 <p>📍 City: {{profile.city}}</p>
-                <p><a href="{% url 'create_status' profile.pk %}" style="text-decoration:none;">Create Status</a></p>
-                <p><a href="{% url 'update_profile' profile.pk %}" style="text-decoration:none;">Update Profile</a></p>
+                <p class="form-button"><a href="{% url 'create_status' profile.pk %}" style="text-decoration:none;">Create Status</a></p>
+                <p class="form-button"><a href="{% url 'update_profile' profile.pk %}" style="text-decoration:none;">Update Profile</a></p>
             </div>
         </div>
     </div>
 
-    <div class = "friend-list">
-        {% if profile.get_friends %}
-            {% for f in profile.get_friends %}
-            <div class = "friend">
-                <img src="{{f.image_url}}" alt="Profile Picture" class="profile-picture">
-            </div>
-            {% endfor %}
-        {% endif %}
-
+    <div class="friends-list">
+        <h2>Friends List</h2>
+        <ul>
+        {% for f in profile.get_friends %}
+            <li>
+                <a href="{% url 'profile' f.pk %}" style="text-decoration:none;">
+                    {% if f.image_url %}
+                    <img src="{{f.image_url}}" alt="Profile Picture" class="profile-picture">
+                    {% else %}
+                        No image
+                    {% endif %}
+                <h3>{{f.first_name}} {{f.last_name}}</h3>
+                </a>
+            </li>
+            {% empty %}
+            <p>{{ profile.first_name }} has no friends yet.</p>
+        {% endfor %}
+        </ul>        
     </div>
+    <br>
+    <a href="{% url 'friend_suggestions' profile.pk %}" class="form-button">Friend Suggestions</a>
+
     
     <div class="status-updates">
         {% if profile.get_status_messages %}
