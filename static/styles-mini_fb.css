@@ -10,7 +10,7 @@ body {
 header {
     background-color: #1877f2;
     color: white;
-    padding: 20px 0;
+    padding: 10px 0;
     text-align: center;
     position: fixed;
     width: 100%;
@@ -88,7 +88,7 @@ h1 {
 
 .profile-container {
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 75px auto;
     background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -204,7 +204,7 @@ h1 {
 /*  Start create_status_form.html css */
 
 .status-container {
-    margin: auto;
+    margin: 75px auto;
     justify-content: center;
     align-items: center;
     background-color: #fff;
@@ -246,8 +246,7 @@ h1 {
 /*  Start create_profile_form.html css */
 
 .form-container {
-    margin-top: 10px;
-    margin: auto;
+    margin: 75px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -292,7 +291,7 @@ h1 {
 
 .friend-suggestions-container {
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 75px auto;
     background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -338,7 +337,7 @@ h1 {
 /* news-feed */
 .news-feed-container {
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 75px auto;
     background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -397,3 +396,27 @@ h1 {
     margin-bottom: 5px;
     
   }
+
+  /* Start login.html css*/
+  .login-container {
+    margin: 75px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 750px;
+  }
+
+  /* End login.html css*/
+
+  /* Start login.html css*/
+  .logout-container {
+    margin: 75px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 750px;
+  }
+  
+  /* End login.html css*/

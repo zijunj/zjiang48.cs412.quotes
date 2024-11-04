@@ -3,9 +3,11 @@
 
 <!-- Navigation Bar -->
 {% block extra_nav_links %}
-<a href="{% url 'show_all_profiles' %}">Show All Profiles</a>
-<a href="{% url 'profile' profile.pk %}">Show Profile Page</a>
-<a href="{% url 'news_feed' profile.pk %}">News Feed</a> 
+<a href="{% url 'show_all_profiles' %}">All Profiles</a> 
+{% if request.user.is_authenticated %}
+{% comment %} <a href="{% url 'profile' profile.pk %}">Show Profile Page</a>
+<a href="{% url 'news_feed' profile.pk %}">News Feed</a>  {% endcomment %}
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -18,8 +20,10 @@
             <div class="profile-details">
                 <p>📧 Email: {{profile.email_address}}</p>
                 <p>📍 City: {{profile.city}}</p>
-                <p class="form-button"><a href="{% url 'create_status' profile.pk %}" style="text-decoration:none;">Create Status</a></p>
-                <p class="form-button"><a href="{% url 'update_profile' profile.pk %}" style="text-decoration:none;">Update Profile</a></p>
+                {% if request.user.is_authenticated %}
+                <p class="form-button"><a href="{% url 'create_status'  %}" style="text-decoration:none;">Create Status</a></p>
+                <p class="form-button"><a href="{% url 'update_profile'  %}" style="text-decoration:none;">Update Profile</a></p>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -44,7 +48,9 @@
         </ul>        
     </div>
     <br>
-    <a href="{% url 'friend_suggestions' profile.pk %}" class="form-button">Friend Suggestions</a>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'friend_suggestions'   %}" class="form-button">Friend Suggestions</a>
+    {% endif %}
 
     
     <div class="status-updates">
@@ -58,9 +64,10 @@
                     {% endfor %}
                 {% endif %}
                 <div class="status-time">{{s.timestamp}}</div><br>
-                <a href="{% url 'update_status' s.pk %}" class="update" style="text-decoration:none;"> Update Status</a>
-                <a href="{% url 'delete_status' s.pk %}" class = "update" style="text-decoration:none;"> Delete</a>
-
+                {% if request.user.is_authenticated %}
+                {% comment %} <a href="{% url 'update_status' s.pk %}" class="update" style="text-decoration:none;"> Update Status</a> {% endcomment %}
+                {% comment %} <a href="{% url 'delete_status' s.pk %}" class = "update" style="text-decoration:none;"> Delete</a> {% endcomment %}
+                {% endif %}
 
             </div>
             {% endfor %}

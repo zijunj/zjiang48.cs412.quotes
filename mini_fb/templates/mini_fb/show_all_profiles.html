@@ -3,7 +3,13 @@
 
 <!-- Navigation Bar -->
 {% block extra_nav_links %}
+    <a href="{% url 'show_all_profiles' %}">All Profiles</a> 
     <a href="{% url 'create_profile' %}">Create Profile</a>
+{% comment %} {% if request.user.is_authenticated %}
+<a href="{% url 'profile' profile.pk %}">Show Profile Page</a>
+<a href="{% url 'news_feed' profile.pk %}">News Feed</a> 
+{% endif %} {% endcomment %}
+    
 {% endblock %}
 
 {% comment %} Body {% endcomment %}

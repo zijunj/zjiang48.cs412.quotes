@@ -1,0 +1,19 @@
+{% extends 'mini_fb/base.html' %}
+{% comment %}mini_fb/templates/mini_fb/logged_out.html{% endcomment %}
+
+{% block extra_nav_links %}
+    <a href="{% url 'show_all_profiles' %}">All Profiles</a> 
+    <a href="{% url 'create_profile' %}">Create Profile</a>
+{% endblock %}
+
+{% block content %}
+
+<div class = "logout-container">
+    <h1>Log Out</h1>
+    <p>You have successfully logged out.</p>
+    <hr>
+    {% comment %} Don't have an account? <a href="{% url 'register' %}">Register here</a>. {% endcomment %}
+</div>
+    
+
+{% endblock %}

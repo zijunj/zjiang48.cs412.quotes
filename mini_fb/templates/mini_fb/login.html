@@ -1,0 +1,28 @@
+{% extends 'mini_fb/base.html' %}
+{% comment %}mini_fb/templates/mini_fb/login.html{% endcomment %}
+
+{% block extra_nav_links %}
+    <a href="{% url 'show_all_profiles' %}">All Profiles</a> 
+    <a href="{% url 'create_profile' %}">Create Profile</a>
+{% endblock %}
+
+{% block content %}
+
+<div class = "login-container">
+    <h1>Login</h1>
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{form}}
+        {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{request.GET.next}}">
+        {% else %}
+            <input type="hidden" name="next" value="{% url 'show_all_profiles' %}">
+        {% endif %}
+        <input type="submit" value="Login">
+    </form>
+    <hr>
+    {% comment %} Don't have an account? <a href="{% url 'register' %}">Register here</a>. {% endcomment %}
+</div>
+    
+
+{% endblock %}
