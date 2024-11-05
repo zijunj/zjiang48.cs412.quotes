@@ -142,18 +142,25 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
     
     def get_success_url(self) -> str:
         '''Return the URL to redirect to on success.'''
+        
+        # find the user who is logged in
+        user = self.request.user
 
         # find the Profile identified by the PK from the URL pattern
-        profile = Profile.objects.get(pk=self.kwargs['pk'])
-        return reverse('profile', kwargs={'pk':profile.pk})
+        profile = Profile.objects.get(user = user)
+        return reverse('profile', kwargs={'pk':profile.id})
         # return reverse('article', kwargs=self.kwargs)
 
     def form_valid(self, form):
         '''This method is called after the form is validated, 
         before saving data to the database.'''
+        
+        # find the user who is logged in
+        user = self.request.user
 
         # find the Profile identified by the PK from the URL pattern
-        profile = Profile.objects.get(pk=self.kwargs['pk'])
+        profile = Profile.objects.get(user = user)
+
 
         # attach this Profile to the instance of the Status Message to set its FK
         form.instance.profile = profile 
