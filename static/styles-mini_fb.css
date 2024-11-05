@@ -245,6 +245,12 @@ h1 {
 
 /*  Start create_profile_form.html css */
 
+.form-wrapper {
+    display: flex; /* Use flexbox layout */
+    justify-content: space-between; /* Space between the forms */
+    margin: 20px; /* Optional margin for spacing */
+}
+
 .form-container {
     margin: 75px auto;
     background-color: #fff;
@@ -418,5 +424,5 @@ h1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 750px;
   }
-  
+
   /* End login.html css*/
