@@ -83,7 +83,7 @@ class VoterDetailView(DetailView):
 class VoterGraphsView(ListView):
     '''Display Graphs for the voters.'''
 
-    template_name = 'voter_analytics/graph.html'
+    template_name = 'voter_analytics/graphs.html'
     model = Voter
     context_object_name = 'voters'
     
