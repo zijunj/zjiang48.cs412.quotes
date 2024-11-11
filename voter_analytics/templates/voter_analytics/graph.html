@@ -1,0 +1,19 @@
+<!-- templates/voter_analytics/graph.html -->
+{% extends 'voter_analytics/base.html' %}
+{% block content %}
+<div class="container">
+    <div>
+        {% include 'voter_analytics/search.html' %}
+    </div>    
+</div>
+<div class="container">
+    {{bar1_div|safe}}
+</div>
+<div class="container">
+    {{bar2_div|safe}}
+</div>
+<div class="container">
+    {{bar3_div|safe}}
+</div>
+
+{% endblock %}

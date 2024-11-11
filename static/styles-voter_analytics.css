@@ -1,0 +1,137 @@
+/* Overall Body Styling */
+body {
+  background-color: #f4f6f8;
+  font-family: Verdana, sans-serif;
+  color: #283D7A;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* Headers and Main Titles */
+h1, h2, h3, footer, header, p {
+  font-family: Verdana, sans-serif;
+  color: #283D7A;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Container Styling */
+.container {
+  width: 90%;
+  max-width: 1000px;
+  padding: 30px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: max-width 0.3s ease;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 0.9em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+th {
+  background-color: #283D7A;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  border-bottom: 2px solid #ddd;
+}
+
+td {
+  border-bottom: 1px solid #ddd;
+  color: #555;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f5f9;
+  cursor: pointer;
+}
+
+/* Pagination Styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  list-style-type: none;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination a {
+  color: #283D7A;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+  background-color: #ccd0d6;
+}
+
+/* Form Styling */
+.form-table {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.form-table input[type="text"],
+.form-table select {
+  padding: 8px;
+  width: 80%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.form-table input[type="text"]:focus,
+.form-table select:focus {
+  border-color: #7599d2;
+}
+
+/* Centered Navigation Links */
+nav ul {
+  text-align: center;
+  padding: 0;
+}
+
+nav ul a {
+  color: #283D7A;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 15px;
+  margin: 0 5px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+nav ul a:hover {
+  background-color: #f1f5f9;
+}

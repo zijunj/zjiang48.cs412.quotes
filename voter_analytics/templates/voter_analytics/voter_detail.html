@@ -1,0 +1,53 @@
+<!-- templates/voter_analytics/voter_detail.html -->
+{% extends 'voter_analytics/base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Voter Detail</h1>
+
+    <div class="row">
+    <table>
+
+        <tbody><tr>
+            <th>Name</th>
+            <td>{{v.first_name}} {{v.last_name}}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>
+                <a href="https://www.google.com/maps?q=
+                    {{v.street_number}} {{v.street_name}} 
+                    {% if v.apartment_number %}
+                        Apt {{v.apartment_number}}
+                    {% endif %}
+                    {{v.zip_code}}" target="_blank">
+                    {{v.street_number}} {{v.street_name}} 
+                    {% if v.apartment_number %}
+                        Apt {{v.apartment_number}}
+                    {% endif %}
+                    {{v.zip_code}}</a>
+            </td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td>{{v.dob}}</td>
+        </tr>
+        <tr>
+            <th>Date of Registration</th>
+            <td>{{v.date_of_registration}}</td>
+        </tr>
+        <tr>
+            <th>Party Affiliation</th>
+            <td>{{v.party_affiliation}}</td>    
+        </tr>
+        <tr>
+            <th>Voter Score</th>
+            <td>{{v.voter_score}}</td>
+        </tr>
+
+    </tbody></table>
+    </div>
+    
+</div>
+
+
+{% endblock %}
