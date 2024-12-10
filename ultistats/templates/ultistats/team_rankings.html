@@ -1,0 +1,89 @@
+<!-- templates/ultistats/team_ranking.html -->
+{% extends 'ultistats/base.html' %}
+{% block content %}
+
+<h1>Teams Rankings</h1>
+    <!-- Filters -->
+    <form method="get" class="filter-form">
+        <!-- College Region Filter -->
+        <div>
+            <label for="college_region"><strong>College Region:</strong></label>
+            <select id="college_region" name="college_region">
+                <option value="">Select One:</option>
+                {% for region in regions %}
+                    <option value="{{ region }}" {% if college_region == region %}selected{% endif %}>{{ region }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    
+        <!-- College Conference Filter -->
+        <div>
+            <label for="college_conference"><strong>College Conference:</strong></label>
+            <select id="college_conference" name="college_conference">
+                <option value="">Select One:</option>
+                {% for conference in conferences %}
+                    <option value="{{ conference }}" {% if college_conference == conference %}selected{% endif %}>{{ conference }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    
+        <!-- School Name Filter -->
+        <div>
+            <label for="school_name"><strong>School Name:</strong></label>
+            <input type="text" id="school_name" name="school_name" placeholder="Enter School Name" value="{{ school_name }}">
+        </div>
+    
+        <!-- Submit and Reset Buttons -->
+        <div>
+            <button type="submit">Submit</button>
+            <button type="reset" onclick="window.location.href='{% url 'team_rankings' %}'">Clear Search</button>
+        </div>
+    </form>
+    
+
+    <!-- Rankings Table -->
+    <table class="team-table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Team</th>
+                <th>College Region</th>
+                <th>College Conference</th>
+                <th>Wins</th>
+                <th>Losses</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for team in teams %}
+            <tr>
+                <td class="rank">{{ team.rank }}</td>
+                <td><a href="{% url 'team_detail' team.pk %}" class="team-name">{{ team.name }}</a></td>
+                <td>{{ team.college_region }}</td>
+                <td>{{ team.college_conference }}</td>
+                <td>{{ team.wins }}</td>
+                <td>{{ team.losses }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8">No teams found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination-container">
+        {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}&college_region={{ college_region }}&college_conference={{ college_conference }}&school_name={{ school_name }}">Previous</a></li>
+            {% endif %}
+            <li class="active">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</li>
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}&college_region={{ college_region }}&college_conference={{ college_conference }}&school_name={{ school_name }}">Next</a></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+
+{% endblock %}

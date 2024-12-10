@@ -1,0 +1,51 @@
+<!-- templates/ultistats/game_list.html -->
+{% extends 'ultistats/base.html' %}
+{% block content %}
+
+<main class="tournament-container">
+    <h1 class="page-title">Games by Tournament</h1>
+
+    <!-- Add Game Section -->
+    <div class="add-game-section">
+        {% if user.is_authenticated %}
+        <a href="{% url 'add_game' %}" class="btn-add-game">Add a New Game</a>
+        {% endif %}
+    </div>
+
+    {% for tournament, games in grouped_games.items %}
+        <div class="tournament-card">
+            <h2 class="tournament-title">{{ tournament }}</h2>
+            <table class="games-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Team A</th>
+                        <th>Team B</th>
+                        <th>Score</th>
+                        <th>Winning Team</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for game in games %}
+                        <tr>
+                            <td>{{ game.date_played }}</td>
+                            <td>{{ game.location }}</td>
+                            <td>{{ game.team_a.name }}</td>
+                            <td>{{ game.team_b.name }}</td>
+                            <td>{{ game.score_team_a }} - {{ game.score_team_b }}</td>
+                            <td>{{ game.winning_team.name }}</td>
+                            <td>
+                                <a href="{% url 'game_detail' game.pk %}" class="btn-view-details">View Details</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+
+</main>
+{% endblock %}
+

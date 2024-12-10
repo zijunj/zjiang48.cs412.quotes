@@ -43,7 +43,7 @@ class ShowAllProfilesView(ListView):
             return context
 
         # find the Profile identified by the PK from the URL pattern
-        profile = Profile.objects.get(user = user)
+        profile = Profile.objects.get(user = 1)
         
         # Add profile to the context variables
         context['profile'] = profile

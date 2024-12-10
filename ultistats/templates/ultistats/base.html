@@ -1,0 +1,42 @@
+<!-- blog/templates/ultistats/base.html -->
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles-ultistats.css' %}">
+    <title>Ultimate Stats Homepage</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="{% static 'img/college_ultimate_logo.png' %}" alt="UFA Logo"> <!-- Replace with your logo file -->
+            <span><a href="{% url 'home' %}">UltiStats</a></span>
+        </div>
+        <ul class="menu">
+            <li><a href="{% url 'team_list' %}">TEAMS</a></li>
+            <li><a href="{% url 'game_list' %}">GAMES</a></li>
+            <li><a href="{% url 'stats' %}">STATS</a></li>
+
+        </ul>
+        <div class="log-buttons">
+            {% if request.user.is_authenticated %}
+            <form action="{% url 'logout' %}" method="POST" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">LOGOUT</button>
+            </form>
+            {% else %}
+            <a href="{% url 'login' %}" class="login-link">LOGIN</a>
+            {% endif %}
+        </div>
+        
+    </div>
+        
+
+
+    {% block content %}
+    {% endblock %}  
+</body>
+</html>

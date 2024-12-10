@@ -1,0 +1,103 @@
+<!-- templates/ultistats/game_detail.html -->
+{% extends 'ultistats/base.html' %}
+{% block content %}
+{% load static %}
+
+<main class="game-detail-container">
+    <!-- Game Status -->
+    <div class="game-status">
+        <p><strong>Game Status:</strong> Final</p>
+    </div>
+
+    <!-- Team Comparison Section -->
+    <div class="team-comparison">
+        <!-- Team A Box -->
+        <div class="team-box team-a">
+            <h3>{{ game.team_a.name }}</h3>
+            <img src="{% static 'img/default-team-a-logo.jpg' %}" alt="{{ game.team_a.name }} Logo" class="team-logo">
+            <p class="team-location">{{ game.team_a.city }}</p>
+            <p class="coach-info">Coach: {{ game.team_a.coach }}</p>
+        </div>
+
+        <!-- Score Section -->
+        <div class="score-section">
+            <div class="score-box">{{ game.score_team_a }}</div>
+            <div class="score-box">{{ game.score_team_b }}</div>
+        </div>
+
+        <!-- Team B Box -->
+        <div class="team-box team-b">
+            <h3>{{ game.team_b.name }}</h3>
+            <img src="{% static 'img/default-team-b-logo.jpg' %}" alt="{{ game.team_b.name }} Logo" class="team-logo">
+            <p class="team-location">{{ game.team_b.city }}</p>
+            <p class="coach-info">Coach: {{ game.team_b.coach }}</p>
+        </div>
+    </div>
+
+    <!-- Game Stats Section -->
+    <div class="header-with-button">
+        <h2>Game Stats</h2>
+        {% if user.is_authenticated %}
+        <a href="{% url 'add_game_stats' game.pk %}" class="btn-add-stats">Add Stats</a>
+        <a href="{% url 'delete_game' game.pk %}" class="btn-delete-game">Delete Game</a>
+        {% endif %}
+    </div>
+
+    <div class="stats-container">
+        <!-- Stats for Team A -->
+        <div class="team-stats">
+            <h3>Stats for {{ game.team_a.name }}</h3>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Goals Scored</th>
+                        <th>Assists</th>
+                        <th>Blocks</th>
+                        <th>Turnovers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in team_a_stats %}
+                    <tr>
+                        <td>{{ stat.player.first_name }} {{ stat.player.last_name }}</td>
+                        <td>{{ stat.goals_scored }}</td>
+                        <td>{{ stat.assists }}</td>
+                        <td>{{ stat.blocks }}</td>
+                        <td>{{ stat.turnovers }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Stats for Team B -->
+        <div class="team-stats">
+            <h3>Stats for {{ game.team_b.name }}</h3>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Goals Scored</th>
+                        <th>Assists</th>
+                        <th>Blocks</th>
+                        <th>Turnovers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in team_b_stats %}
+                    <tr>
+                        <td>{{ stat.player.first_name }} {{ stat.player.last_name }}</td>
+                        <td>{{ stat.goals_scored }}</td>
+                        <td>{{ stat.assists }}</td>
+                        <td>{{ stat.blocks }}</td>
+                        <td>{{ stat.turnovers }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

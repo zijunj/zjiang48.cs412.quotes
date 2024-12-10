@@ -1,0 +1,34 @@
+<!-- templates/ultistats/game_detail.html -->
+{% extends 'ultistats/base.html' %}
+{% block content %}
+<main class="stats-main">
+    <h1>STATS</h1>
+    <div class="stats-section">
+        
+        <div class="stats-item">
+            <a href="{% url 'player_search' %}">Player Search</a>
+            <p>Find any player who has ever played in the league. Press on each player for their individual stats.</p>
+        </div>
+       
+       
+        <div class="stats-item">
+            <a href="{% url 'team_rankings' %}">Team Rankings</a>
+            <p>View the ranks of the teams accross all of USA in Division 1. Press on each team for their team stats</p>
+        </div>
+      
+      
+        <div class="stats-item">
+            <h2>Download Stats</h2>
+            <div class="btn-group">
+                <a href="{% url 'download_stats' 'players' %}" class="btn btn-primary">Download Player Stats</a>
+                <a href="{% url 'download_stats' 'teams' %}" class="btn btn-secondary">Download Team Stats</a>
+                <a href="{% url 'download_stats' 'games' %}" class="btn btn-success">Download Game Stats</a>
+            </div>
+            <p>Click on the buttons above to download raw statistics for players, teams, or games.</p>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+    
+

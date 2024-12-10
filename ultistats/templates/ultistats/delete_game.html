@@ -1,0 +1,17 @@
+<!-- templates/ultistats/delete_game.html -->
+
+{% extends 'ultistats/base.html' %}
+{% block content %}
+
+<main class="confirm-delete-container">
+    <h1>Delete Game</h1>
+    <p>Are you sure you want to delete the game between {{ game.team_a.name }} and {{ game.team_b.name }}?</p>
+    <p>This action cannot be undone.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-delete-confirm">Yes, Delete Game</button>
+        <a href="{% url 'game_detail' game.pk %}" class="btn-cancel">Cancel</a>
+    </form>
+</main>
+
+{% endblock %}

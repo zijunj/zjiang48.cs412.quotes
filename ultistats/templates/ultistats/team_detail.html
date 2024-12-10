@@ -1,0 +1,54 @@
+<!-- templates/ultistats/team_detail.html -->
+{% extends 'ultistats/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="team-page">
+  <div class="team-page-header" style = "background: linear-gradient(to right,  #f9f9f9 50%, {{ dominant_color }} 50%);">
+    <!-- Team Info Section -->
+    <div class="team-info" >
+        <h1>{{ team.name }}</h1>
+        <p>Coached by: {{ team.coach }}</p>
+        <p>City: {{ team.city }}</p>
+        <p>Rank: {{ team.rank }}</p>
+        <p>Record: {{ team.wins }} - {{ team.losses }}</p>
+        <a href="{% url 'team_statistics' team.pk %}">
+            <button>Statistics</button>
+        </a>
+    </div>
+
+    <!-- Team Logo Section -->
+    <div class="team-detail-logo">
+        {% if team.logo %}
+            <img src="{{ team.logo.url }}" alt="{{ team.name }}">
+        {% else %}
+            <img src="{% static 'img/default-team-logo.jpg' %}" alt="Default Photo">
+        {% endif %}
+    </div>
+  </div>
+
+  <!-- Players Section -->
+  <div class="content-main">
+      <h2 class="players-heading">Players</h2>
+      <div class="players-grid">
+        {% for player in players %}
+        <div class="player-card">
+          <a href="{% url 'player_detail' player.pk %}">
+            <img src="{% static 'img/default-player-photo.jpg' %}" alt="{{ player.first_name }} {{ player.last_name }}" class="player-photo">
+          </a>
+          <a href="{% url 'player_detail' player.pk %}">
+            <h3 class="player-name">{{ player.first_name }} {{ player.last_name }} # {{ player.jersey_number }}</h3>
+          </a>
+        </div>
+        {% endfor %}
+        {% if not players %}
+        <p>No players found for this team.</p>
+        {% endif %}
+      </div>
+  </div>
+</div>
+
+
+{% endblock %}
+

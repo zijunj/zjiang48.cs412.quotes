@@ -1,0 +1,62 @@
+<!-- templates/ultistats/player_search.html -->
+{% extends 'ultistats/base.html' %}
+{% block content %}
+<main class="player-search-container">
+    <h1 class="page-title">Player Search</h1>
+    <form method="get" class="search-form">
+        <label for="search">Search Players:</label>
+        <input type="text" id="search" name="q" value="{{ query }}" placeholder="Search by name">
+        <button type="submit">Search</button>
+    </form>
+
+    <table class="player-table">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Team</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in page_obj %}
+                <tr>
+                    <td>
+                        <a href="{% url 'player_detail' player.pk %}">
+                            {{ player.first_name }} {{ player.last_name }}
+                        </a>
+                    </td>
+                    <td>{{ player.team.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+    <ul class="pagination">
+        <!-- Previous Page Link -->
+        {% if page_obj.has_previous %}
+        <li>
+            <a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}" class="pagination-link">Previous</a>
+        </li>
+        {% endif %}
+
+        <!-- Current Page Info -->
+        <li class="active">
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        </li>
+
+        <!-- Next Page Link -->
+        {% if page_obj.has_next %}
+        <li>
+            <a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}" class="pagination-link">Next</a>
+        </li>
+        {% else %}
+        <li class="disabled">
+            <span>Next</span>
+        </li>
+        {% endif %}
+    </ul>
+    {% endif %}
+</main>
+{% endblock %}
+

@@ -1,0 +1,49 @@
+<!-- templates/ultistats/add_gamestats.html -->
+
+{% extends 'ultistats/base.html' %}
+
+{% block content %}
+<main class="add-stats-container">
+    <h1>Add Stats for {{ game }}</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="split-two-forms">
+                <!-- Team 1 -->
+            <div class="team-stats-1">
+                <h2>{{ team1.name }}</h2>
+                {{ formset_team1.management_form }}
+                {% for form in formset_team1 %}
+                    {% if not form.instance.pk or form.instance.player.team == team1 %}
+                    <div class="stats-form">
+                        {{ form.as_p }}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <!-- Team 2 -->
+            <div class="team-stats-2">
+                <h2>{{ team2.name }}</h2>
+                {{ formset_team2.management_form }}
+                {% for form in formset_team2 %}
+                    {% if not form.instance.pk or form.instance.player.team == team2 %}
+                    <div class="stats-form">
+                        {{ form.as_p }}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit Stats</button>
+
+    </form>
+
+</main>
+
+
+{% endblock %}
+
+
+

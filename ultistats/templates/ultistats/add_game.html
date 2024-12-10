@@ -1,0 +1,14 @@
+<!-- templates/ultistats/add_game.html -->
+{% extends 'ultistats/base.html' %}
+
+{% block content %}
+<main class="add-game-container">
+    <h1>Add Game</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit" class="btn-submit">Add Game</button>
+    </form>
+</main>
+{% endblock %}

@@ -1,0 +1,82 @@
+<!-- templates/ultistats/team_statistics.html -->
+
+{% extends 'ultistats/base.html' %}
+{% block content %}
+
+<main class="team-stats-container">
+    <h1>Statistics for {{ team.name }}</h1>
+
+    <!-- Team Statistics -->
+    <section class="team-overall-stats">
+        <h2>Overall Statistics</h2>
+        <p><strong>Total Games Played:</strong> {{ total_games }}</p>
+        <p><strong>Total Wins:</strong> {{ team.wins }}</p>
+        <p><strong>Total Losses:</strong> {{ team.losses }}</p>
+        <p><strong>Win Percentage:</strong> {{ win_percentage }}%</p>
+        <ul>
+            <li><strong>Total Goals Scored:</strong> {{ team_stats.total_goals }}</li>
+            <li><strong>Total Assists:</strong> {{ team_stats.total_assists }}</li>
+            <li><strong>Total Blocks:</strong> {{ team_stats.total_blocks }}</li>
+            <li><strong>Total Turnovers:</strong> {{ team_stats.total_turnovers }}</li>
+        </ul>
+    </section>
+
+    <section class="head-to-head-comparison">
+        <h2>Compare Head-to-Head</h2>
+        <form method="get">
+            <label for="other_team">Select Team to Compare:</label>
+            <select name="other_team" id="other_team">
+                {% for t in other_teams %}
+                <option value="{{ t.pk }}" {% if other_team and other_team.pk == t.pk %}selected{% endif %}>
+                    {{ t.name }}
+                </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Compare</button>
+        </form>
+
+        {% if other_team %}
+        <h3>Comparison with {{ other_team.name }}</h3>
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>{{ team.name }}</th>
+                        <th>{{ other_team.name }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Win Percentage</td>
+                        <td>{{ win_percentage }}%</td>
+                        <td>{{ win_percentage_other }}%</td>
+                    </tr>
+                    <tr>
+                        <td>Total Goals</td>
+                        <td>{{ team_stats.total_goals }}</td>
+                        <td>{{ other_team_stats.total_goals }}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Assists</td>
+                        <td>{{ team_stats.total_assists }}</td>
+                        <td>{{ other_team_stats.total_assists }}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Blocks</td>
+                        <td>{{ team_stats.total_blocks }}</td>
+                        <td>{{ other_team_stats.total_blocks }}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Turnovers</td>
+                        <td>{{ team_stats.total_turnovers }}</td>
+                        <td>{{ other_team_stats.total_turnovers }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </section>
+</main>
+
+{% endblock %}

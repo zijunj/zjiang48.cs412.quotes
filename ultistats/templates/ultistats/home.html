@@ -1,0 +1,60 @@
+<!-- templates/ultistats/home.html -->
+{% extends 'ultistats/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main class="home-container">
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+        <h1>Welcome to UltiStats</h1>
+        <p>Explore stats and records of teams, players, and games.</p>
+    </section>
+
+
+    <!-- Stats and Headlines -->
+    <div class="stats-headlines-container">
+        <!-- Quick Highlights -->
+        <section class="quick-highlights">
+            <h2>Quick Highlights</h2>
+            <ul>
+                <li>Total Teams: {{ total_teams }}</li>
+                <li>Total Players: {{ total_players }}</li>
+                <li>Total Games: {{ total_games }}</li>
+            </ul>
+        </section>
+
+        <!-- Headlines -->
+        <section class="headlines">
+            <h2>Latest College News</h2>
+            <ul>
+                <li><a href="https://usaultimate.org/news/2024/08/26549/">2025 U-24 Worlds Player Applications Now Open</a></li>
+                <li><a href="https://usaultimate.org/news/2023/12/competition-working-group-updates/">Competition Working Group Updates</a></li>
+                <li><a href="https://usaultimate.org/news/2023/11/2024-college-championships-awarded-to-milwaukee-madison/">2024 College Championships Awarded to Milwaukee, Madison</a></li>
+                <li><a href="https://usaultimate.org/news/2023/05/usa-ultimate-extends-media-rights-agreement-with-espn/">USA Ultimate Extends Media Rights Agreement with ESPN</a></li>
+                <li><a href="https://usaultimate.org/news/2023/03/usa-ultimate-to-seek-feedback-on-event-hosting-policy-in-light-of-anti-transgender-sports-laws/">USA Ultimate to Seek Feedback on Event Hosting Policy in light of Anti-Transgender Sports Laws</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Videos Section -->
+    <section class="videos-section">
+        <h2>Videos to Watch</h2>
+        <div class="videos-grid">
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/XdDu3qGvAEg" allowfullscreen></iframe>
+                <p>College National 2024 Men's Semifinal: Colorado vs Brown</p>
+            </div>
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/oSTEesjcAAI" allowfullscreen></iframe>
+                <p>College National 2024 Men's Semifinal: North Carolina vs Cal Poly SLO</p>
+            </div>
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/yMgAjpsP5IA" allowfullscreen></iframe>
+                <p>College National 2024 Men's Final: Brown vs Cal Poly SLO</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+<!-- templates/ultistats/player_detail.html -->
+
+{% extends 'ultistats/base.html' %}
+{% load static %}
+{% block content %}
+<main class="player-detail-container">
+    <!-- Header Section -->
+    <div class="player-detail-header">
+        <div class="player-photo-container">
+            <img src="{% static 'img/default-player-photo.jpg' %}" alt="{{ player.first_name }} {{ player.last_name }}">
+        </div>
+        <div class="player-detail-info">
+            <h1>{{ player.first_name }} {{ player.last_name }}</h1>
+            <p><strong>Team:</strong> {{ player.team.name }}</p>
+            <h2>#{{ player.jersey_number }}</h2>
+        </div>
+    </div>
+
+    <!-- Aggregated Stats Section -->
+    <div class="player-stats">
+        <h2>Overall Stats</h2>
+        <p><strong>Total Goals Scored:</strong> {{ aggregated_stats.total_goals }}</p>
+        <p><strong>Total Assists:</strong> {{ aggregated_stats.total_assists }}</p>
+        <p><strong>Total Blocks:</strong> {{ aggregated_stats.total_blocks }}</p>
+        <p><strong>Total Turnovers:</strong> {{ aggregated_stats.total_turnovers }}</p>
+    </div>
+
+    <!-- Game-by-Game Stats Section -->
+    <div class="player-game-stats">
+        <h2>Game-by-Game Stats</h2>
+        <table class="player-stats-table">
+            <thead>
+                <tr>
+                    <th>Game</th>
+                    <th>Winning Team</th>
+                    <th>Goals</th>
+                    <th>Assists</th>
+                    <th>Blocks</th>
+                    <th>Turnovers</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stat in player_game_stats %}
+                <tr>
+                    <td>{{ stat.game }}</td>
+                    <td>
+                        {{ stat.game.winning_team }}
+                    </td>
+                    <td>{{ stat.goals_scored }}</td>
+                    <td>{{ stat.assists }}</td>
+                    <td>{{ stat.blocks }}</td>
+                    <td>{{ stat.turnovers }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}
+

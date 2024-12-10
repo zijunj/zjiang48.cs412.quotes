@@ -1,0 +1,12 @@
+<!-- templates/ultistats/download_players_stats.html -->
+
+{% extends 'ultistats/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Download Players Stats</h1>
+    <p>Click the button below to download the CSV file containing players' stats and associated teams.</p>
+    <a href="{% url 'download_players_stats' %}" class="btn btn-primary">Download Players Stats CSV</a>
+</div>
+
+{% endblock %}

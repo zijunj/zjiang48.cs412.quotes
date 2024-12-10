@@ -1,0 +1,35 @@
+<!-- templates/ultistats/team_list.html -->
+{% extends 'ultistats/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<main class="all-teams-container">
+  <h1 class="page-heading">Teams </h1>
+  
+  {% for region, teams in teams_by_region.items %}
+  <section class="region-section">
+    <h2 class="region-name">{{ region }}</h2>
+    <div class="teams-grid">
+      {% for team in teams %}
+      <div class="teams-card">
+        <a href="{% url 'team_detail' team.pk %}">
+          {% if team.logo %}
+              <img src="{{ team.logo.url }}" alt="{{ team.name }}" class = "team-logo">
+          {% else %}
+              <img src={% static 'img/default-team-logo.jpg' %} alt="Default Photo" class = "team-logo">
+          {% endif %}
+        </a>
+        <h3 class="team-name">
+          <a href="{% url 'team_detail' team.pk %}">{{ team.name }}</a>
+        </h3>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+</main>
+
+{% endblock %}
+

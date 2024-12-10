@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import date
+from django.utils.text import slugify
+
 
 
 # Create your models here.
@@ -8,10 +10,14 @@ from django.db import models
 
 class Team(models.Model):
     name = models.CharField(max_length=255)
-    coach = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    win_count = models.IntegerField(default=0)
-    loss_count = models.IntegerField(default=0)
+    coach = models.CharField(max_length=255, blank=True)
+    city = models.CharField(max_length=255, blank=True)
+    rank = models.IntegerField()
+    wins = models.IntegerField()
+    losses = models.IntegerField()
+    college_region = models.CharField(max_length=255)
+    college_conference = models.CharField(max_length=255)
+    logo = models.ImageField(blank=True)
 
     def __str__(self):
         return self.name
@@ -35,6 +41,8 @@ class Game(models.Model):
     score_team_a = models.IntegerField()
     score_team_b = models.IntegerField()
     winning_team = models.ForeignKey('Team', on_delete=models.CASCADE, related_name='winning_games', null=True, blank=True)
+    tournament = models.CharField(max_length=255)
+
 
     def __str__(self):
         return f"{self.team_a.name} vs {self.team_b.name} on {self.date_played}"
@@ -55,10 +63,9 @@ class GameStats(models.Model):
     
 def load_players():
     '''Load data records from a CSV file into model instances.'''
-
     
     # open the file for reading:
-    filename = r'c:\Users\Victor\Downloads\trash\players_brown.csv'
+    filename = r'C:\Users\Victor\Downloads\trash\players_washu.csv'
     f = open(filename)
     headers = f.readline() # read/discard the headers
     print(headers)
@@ -69,7 +76,7 @@ def load_players():
         # provide protection around code that might generate an exception
             fields = line.split(',') # create a list of fields
             
-            team = Team.objects.get(name='Brownian Motion')
+            team = Team.objects.get(name='Washington University')
             
             # create a new instance of Result object with this record from CSV
             player = Player(
@@ -80,12 +87,40 @@ def load_players():
                         )
             player.save() # save this instance to the database.
             
+def load_teams():
+    '''Load data records from a CSV file into model instances.'''
+    
+    # open the file for reading:
+    filename = r'C:\Users\Victor\Downloads\trash\all_teams.csv'
+    f = open(filename)
+    headers = f.readline() # read/discard the headers
+    print(headers)
+    
+    # loop to read all the lines in the file
+    for line in f:
+        
+        # provide protection around code that might generate an exception
+            fields = line.split(',') # create a list of fields
+                
+            # create a new instance of Result object with this record from CSV
+            team = Team(
+                            name = fields[0],
+                            coach = fields[1],
+                            city = fields[2],
+                            rank = fields[3],
+                            wins = fields[4],
+                            losses = fields[5],
+                            college_region = fields[6],
+                            college_conference = fields[7],
+                        )
+            team.save() # save this instance to the database.
+            
 def load_game_stats():
     '''Load data records from a CSV file into model instances.'''
 
     
     # open the file for reading:
-    filename = r'C:\Users\Victor\Downloads\trash\players_stats.csv'
+    filename = r'c:\Users\Victor\Downloads\trash\washu_georgiaVSwashu.csv'
     f = open(filename)
     headers = f.readline() # read/discard the headers
     print(headers)
@@ -98,9 +133,12 @@ def load_game_stats():
             
             player = Player.objects.get(first_name=fields[0], last_name = fields[1])
             
+            # Fetch the team instance for team_a
+            team_a = Team.objects.get(name="Georgia (Jojah)")
+            
             # create a new instance of Result object with this record from CSV
             gamestats = GameStats(
-                            game = Game.objects.get(date_played = date(2024, 5, 27)),
+                            game = Game.objects.get(date_played = date(2024, 5, 24), team_a=team_a),
                             player = player,
                             goals_scored = fields[2],
                             assists = fields[3],
