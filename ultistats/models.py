@@ -1,3 +1,8 @@
+# File: ultistats/models.py
+# Author: Zi Jun Jiang (zjiang48@bu.edu), 12/10/2024
+# Description: Model part of the MVC. This file allows admin
+# to input data models for the UltiStat application.
+
 from django.db import models
 from datetime import date
 from django.utils.text import slugify
@@ -9,6 +14,9 @@ from django.utils.text import slugify
 from django.db import models
 
 class Team(models.Model):
+    '''
+    Team data attributes
+    '''
     name = models.CharField(max_length=255)
     coach = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=255, blank=True)
@@ -24,6 +32,10 @@ class Team(models.Model):
 
 
 class Player(models.Model):
+    '''
+        Player data attributes
+    '''
+    
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='players')
@@ -34,6 +46,10 @@ class Player(models.Model):
 
 
 class Game(models.Model):
+    '''
+        Game data attributes
+    '''
+    
     date_played = models.DateField()
     location = models.CharField(max_length=255)
     team_a = models.ForeignKey('Team', on_delete=models.CASCADE, related_name='team_a_games')
@@ -50,6 +66,9 @@ class Game(models.Model):
 
 
 class GameStats(models.Model):
+    '''
+        GameStats data attributes 
+    '''
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='game_stats')
     player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='player_stats')
     goals_scored = models.IntegerField(default=0)
@@ -78,7 +97,7 @@ def load_players():
             
             team = Team.objects.get(name='Washington University')
             
-            # create a new instance of Result object with this record from CSV
+            # create a new instance of Player object with this record from CSV
             player = Player(
                             first_name = fields[0],
                             last_name = fields[1],
@@ -102,7 +121,7 @@ def load_teams():
         # provide protection around code that might generate an exception
             fields = line.split(',') # create a list of fields
                 
-            # create a new instance of Result object with this record from CSV
+            # create a new instance of Team object with this record from CSV
             team = Team(
                             name = fields[0],
                             coach = fields[1],
@@ -131,12 +150,14 @@ def load_game_stats():
         # provide protection around code that might generate an exception
             fields = line.split(',') # create a list of fields
             
+            
+            # Filter player in the game stats
             player = Player.objects.get(first_name=fields[0], last_name = fields[1])
             
             # Fetch the team instance for team_a
             team_a = Team.objects.get(name="Georgia (Jojah)")
             
-            # create a new instance of Result object with this record from CSV
+            # create a new instance of Gamestats object with this record from CSV
             gamestats = GameStats(
                             game = Game.objects.get(date_played = date(2024, 5, 24), team_a=team_a),
                             player = player,

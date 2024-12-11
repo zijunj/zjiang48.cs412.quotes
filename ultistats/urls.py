@@ -1,3 +1,7 @@
+# File: ultistats/urls.py
+# Author: Zi Jun Jiang (zjiang48@bu.edu), 12/10/2024
+# Description: Directs the urls to the correct function
+# From the views.py
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
@@ -32,6 +36,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/ultistats'), name='logout'),
     path('signup/', SignupView.as_view(), name='signup'),
 
+    # Download
     path('download/<str:stat_type>/', DownloadStatsCSVView.as_view(), name='download_stats'),
    
 

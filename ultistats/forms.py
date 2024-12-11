@@ -1,11 +1,15 @@
-# ulti_stats/forms.py
+# File: ultistats/forms.py
+# Author: Zi Jun Jiang (zjiang48@bu.edu), 12/10/2024
+# Description: Creates forms for user to submit to the web application.
 
 from django import forms
 from django.forms import inlineformset_factory, BaseInlineFormSet
 from .models import *
 
 class GameForm(forms.ModelForm):
+    '''A form to add a Game to the database'''
     class Meta:
+        '''Associate this HTML form with the Game data model'''
         model = Game
         fields = ['date_played', 'location', 'team_a', 'team_b', 'score_team_a', 'score_team_b', 'winning_team', 'tournament']
         widgets = {

@@ -1,5 +1,5 @@
 # File: ultistats/views.py
-# Author: Zi Jun Jiang (zjiang48@bu.edu), 11/11/2024
+# Author: Zi Jun Jiang (zjiang48@bu.edu), 12/10/2024
 # Description: Controller part of MVC as this file creates 
 # functions/classes to connect urls to the correct templates
 from typing import Any
@@ -22,13 +22,13 @@ from .models import *
 from PIL import Image
 from collections import Counter
 
-from colorthief import ColorThief
 from django.contrib.auth import login
 
 
 
 # Create your views here.
 
+# Homepage 
 class HomepageView(TemplateView):
     template_name = 'ultistats/home.html'
 
@@ -170,6 +170,8 @@ class TeamRankingsView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
+        # Provide context for regions and conferences
         context['regions'] = [
             'New England', 'Atlantic Coast', 'Southwest', 'South Central', 
             'Northwest', 'North Central', 'Southeast', 'Ohio Valley', 
@@ -237,8 +239,8 @@ class TeamStatisticsView(DetailView):
         # Calculate total games played
         total_games = team.wins + team.losses
         
+        # Calculate win percentage
         win_percentage = round((team.wins / total_games) * 100, 2) if total_games > 0 else 0
-
 
         # Aggregate team statistics from all players
         team_stats = GameStats.objects.filter(player__team=team).aggregate(
@@ -285,12 +287,6 @@ class TeamStatisticsView(DetailView):
 
         return context
     
-    
-
-
-
-    
-
 # List view for all games
 class GameListView(ListView):
     model = Game
@@ -329,19 +325,29 @@ class GameDetailView(DetailView):
         context['team_b_stats'] = game.game_stats.filter(player__team=game.team_b)
         return context
     
+# View for adding a new game
 class AddGameView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    """
+    AddGameView handles the creation of a new game entry. 
+    This view ensures that only logged-in users can access it.
+    """
     model = Game
     form_class = GameForm
     template_name = 'ultistats/add_game.html'
     success_url = reverse_lazy('game_list')
     success_message = "Game and stats added successfully!"
     
+# View for deleting an existing game
 class GameDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    GameDeleteView handles the deletion of an existing game entry.
+    This view ensures that only logged-in users can delete a game.
+    """
     model = Game
     template_name = 'ultistats/delete_game.html'
     success_url = reverse_lazy('game_list')  # Redirect to the game list after deletion
     
-
+# View to add Gamestats
 class AddGameStatsView(LoginRequiredMixin, FormView):
     template_name = 'ultistats/add_gamestats.html'
 
@@ -393,11 +399,8 @@ class AddGameStatsView(LoginRequiredMixin, FormView):
 
         # Bind formsets with POST data
         formset_team1 = GameStatsFormSet(request.POST, prefix='team1', instance=game)
-        print(len(formset_team1))
         formset_team2 = GameStatsFormSet(request.POST, prefix='team2', instance=game)
         
-        print("Team 1 Management Form Data:", formset_team1.management_form.data)
-        print("Team 2 Management Form Data:", formset_team2.management_form.data)
         # Restrict queryset for validation
         for form in formset_team1:
             form.fields['player'].queryset = team1_players
@@ -417,14 +420,26 @@ class AddGameStatsView(LoginRequiredMixin, FormView):
             messages.error(request, 'There was an error with your submission.')
             return self.render_to_response(self.get_context_data())
 
+# View for downloading statistics as CSV files
 class DownloadStatsCSVView(View):
-    
+    """
+    Handles the generation and download of CSV files for players, teams, and games statistics.
+    """
+
     def get(self, request, stat_type, *args, **kwargs):
-        # Create the HttpResponse object with the appropriate CSV header
+        """
+        Handles the GET request to generate a CSV file.
+        Args:
+            request: The HTTP request object.
+            stat_type: The type of statistics to download ('players', 'teams', or 'games').
+        Returns:
+            HttpResponse: A CSV file response or an error message for invalid stat type.
+        """
+        # Create the HttpResponse object with the appropriate CSV headers
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = f'attachment; filename="{stat_type}_stats.csv"'
 
-        # Determine the type of data to export
+        # Determine the type of data to export and call the respective method
         if stat_type == 'players':
             self.download_player_stats(response)
         elif stat_type == 'teams':
@@ -432,6 +447,7 @@ class DownloadStatsCSVView(View):
         elif stat_type == 'games':
             self.download_game_stats(response)
         else:
+            # Return a 400 Bad Request response for invalid stat type
             response.status_code = 400
             response.write("Invalid stat type")
             return response
@@ -439,14 +455,24 @@ class DownloadStatsCSVView(View):
         return response
 
     def download_player_stats(self, response):
+        """
+        Writes player statistics to the CSV response.
+        Args:
+            response: The HttpResponse object for writing CSV data.
+        """
         writer = csv.writer(response)
+        # Write the header row
         writer.writerow(['Player Name', 'Team', 'Total Goals', 'Total Assists', 'Total Blocks', 'Total Turnovers'])
         players = Player.objects.all()
+
+        # Iterate through each player and calculate their stats
         for player in players:
             total_goals = GameStats.objects.filter(player=player).aggregate(models.Sum('goals_scored'))['goals_scored__sum'] or 0
             total_assists = GameStats.objects.filter(player=player).aggregate(models.Sum('assists'))['assists__sum'] or 0
             total_blocks = GameStats.objects.filter(player=player).aggregate(models.Sum('blocks'))['blocks__sum'] or 0
             total_turnovers = GameStats.objects.filter(player=player).aggregate(models.Sum('turnovers'))['turnovers__sum'] or 0
+
+            # Write the player's stats to the CSV file
             writer.writerow([
                 f"{player.first_name} {player.last_name}",
                 player.team.name,
@@ -457,9 +483,17 @@ class DownloadStatsCSVView(View):
             ])
 
     def download_team_stats(self, response):
+        """
+        Writes team statistics to the CSV response.
+        Args:
+            response: The HttpResponse object for writing CSV data.
+        """
         writer = csv.writer(response)
+        # Write the header row
         writer.writerow(['Team Name', 'Coach', 'City', 'Rank', 'Wins', 'Losses', 'College Region', 'College Conference'])
         teams = Team.objects.all()
+
+        # Iterate through each team and write its stats
         for team in teams:
             writer.writerow([
                 team.name,
@@ -473,9 +507,17 @@ class DownloadStatsCSVView(View):
             ])
 
     def download_game_stats(self, response):
+        """
+        Writes game statistics to the CSV response.
+        Args:
+            response: The HttpResponse object for writing CSV data.
+        """
         writer = csv.writer(response)
+        # Write the header row
         writer.writerow(['Date Played', 'Location', 'Team A', 'Team B', 'Score Team A', 'Score Team B', 'Winning Team', 'Tournament'])
         games = Game.objects.all()
+
+        # Iterate through each game and write its stats
         for game in games:
             writer.writerow([
                 game.date_played,
