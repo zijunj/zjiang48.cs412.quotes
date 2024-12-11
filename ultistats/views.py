@@ -19,6 +19,8 @@ from django.db.models import Sum, Q
 from django.contrib import messages
 from .forms import *
 from .models import *
+from PIL import Image
+from collections import Counter
 
 from colorthief import ColorThief
 from django.contrib.auth import login
@@ -211,12 +213,14 @@ class TeamDetailView(DetailView):
         
         # Extract the dominant color if a logo exists
         if team.logo:
-            color_thief = ColorThief(team.logo.path)
-            dominant_color = color_thief.get_color(quality=1)  # Returns (R, G, B)
-            context['dominant_color'] = f'rgb({dominant_color[0]}, {dominant_color[1]}, {dominant_color[2]})'
+            image_path = team.logo.path
+            image = Image.open(image_path).convert('RGB')  # Ensure it's RGB
+            pixels = list(image.getdata())
+            most_common_color = Counter(pixels).most_common(1)[0][0]  # Returns (R, G, B)
+            context['dominant_color'] = f'rgb({most_common_color[0]}, {most_common_color[1]}, {most_common_color[2]})'
         else:
             # Default color if no logo
-            context['dominant_color'] = '#f9f9f9'  
+            context['dominant_color'] = '#f9f9f9'
         
         return context
  

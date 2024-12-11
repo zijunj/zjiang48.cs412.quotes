@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d6271640d3b4fc9d479158871ce20f4037063d6fb76b2ea09096af27ba0d0271"
+            "sha256": "6e86ed5fb5476b3551b757ac79a973db66b102090ad6efcb9a85b7bc9574d4a6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,14 +23,6 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==3.8.1"
-        },
-        "colorthief": {
-            "hashes": [
-                "sha256:079cb0c95bdd669c4643e2f7494de13b0b6029d5cdbe2d74d5d3c3386bd57221",
-                "sha256:b04fc8ce5cf9c888768745e29cb19b7b688d5711af6fba26e8057debabec56b9"
-            ],
-            "index": "pypi",
-            "version": "==0.2.1"
         },
         "django": {
             "hashes": [
