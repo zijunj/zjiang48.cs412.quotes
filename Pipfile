@@ -8,6 +8,8 @@ django = ">=5.1.4"
 gunicorn = "*"
 pillow = "*"
 plotly = "*"
+colorthief = "*"        # ColorThief for extracting dominant colors from images
+
 
 [dev-packages]
 

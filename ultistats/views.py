@@ -3,42 +3,23 @@
 # Description: Controller part of MVC as this file creates 
 # functions/classes to connect urls to the correct templates
 from typing import Any
-from django.db.models.query import QuerySet
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import CreateView, ListView, DetailView, TemplateView, DeleteView, View
-from django.db.models import Min, Max
-from django.db.models.functions import ExtractYear
-from django.core.exceptions import ValidationError
-from django.http import Http404
 from itertools import groupby
 from operator import attrgetter
 from django.contrib.messages.views import SuccessMessageMixin
-from django.urls import reverse_lazy, reverse
-from django.views.generic.base import TemplateResponseMixin
+from django.urls import reverse_lazy
 from collections import defaultdict
-import requests
-from bs4 import BeautifulSoup
 from django.contrib.auth.mixins import LoginRequiredMixin
 import csv
 from django.http import HttpResponse
-
 from django.contrib.auth.forms import UserCreationForm
-
-
-from django.views.generic.edit import FormView, BaseFormView
-
-
-from django.db.models import Sum, Count
-
+from django.views.generic.edit import FormView
+from django.db.models import Sum, Q
 from django.contrib import messages
 from .forms import *
-
 from .models import *
-from django.db.models import Q
 
-
-import plotly
-import plotly.graph_objects as go
 from colorthief import ColorThief
 from django.contrib.auth import login
 
