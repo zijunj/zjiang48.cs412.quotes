@@ -30,22 +30,4 @@ def test_load_roster(school_name, team_name):
                 print(f"Error processing player: {player} — {e}")
 
 test_load_roster("Harvard", "Red Line")
-from usau_scraper import getTeamInfo
 
-def print_team_uri(school, team):
-    info = getTeamInfo(
-        schoolName=school,
-        teamName=team,
-    )
-
-    if info["res"] != "OK" or not info["teams"]:
-        print("Team not found.")
-        return
-
-    for team_data in info["teams"]:
-        print(f"{team_data['schoolName']} {team_data['teamName']}: {team_data.get('teamUri', '(no URI found)')}")
-
-# print_team_uri(
-#     school="Harvard",
-#     team="Red Line",
-# )

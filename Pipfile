@@ -8,7 +8,7 @@ django = "*"
 gunicorn = "*"
 pillow = "*"
 plotly = "*"
-
+usau_scraper = "*"
 
 [dev-packages]
 
