@@ -6,6 +6,7 @@
 from django.db import models
 from datetime import date
 from django.utils.text import slugify
+from usau_scraper import *
 
 
 
@@ -168,6 +169,53 @@ def load_game_stats():
                         )
             gamestats.save() # save this instance to the database.
             
+
+def load_roster():
+    '''Load roster from USAU scraper into Player model instances.'''
+    
+    # hardcoded teamURI for Harvard Red Line (can be changed)
+    team_uri = "/teams/events/Eventteam/?TeamId=7E8mEMHiVuhToZsS%2bkibXR15iSpAv63Zm9mvof37Z2o%3d"
+    
+    data = getTeamRoster(teamURI=team_uri)
+
+    if data['res'] != 'OK' or not data['teams']:
+        print("No team data found.")
+        return
+
+    for team_data in data['teams']:
+        print(f"✅ Team: {team_data['teamName']} ({team_data['schoolName']})")
+
+        team = Team.objects.get(name=team_data['schoolName'])
+        team.players.all().delete()  # deletes all Player objects related to that team
+
+        for player_data in team_data['roster']:
+            try:
+                name = player_data.get('name', '').strip()
+                jersey = player_data.get('no', '0').strip()
+
+                if " " in name:
+                    first, last = name.split(" ", 1)
+                else:
+                    first, last = name, ""
+
+                # convert jersey number to int, default to 0 if invalid
+                try:
+                    jersey_number = int(jersey)
+                except ValueError:
+                    jersey_number = 0
+
+                # create a new Player instance
+                player = Player(
+                    first_name = first,
+                    last_name = last,
+                    team = team,
+                    jersey_number = jersey_number,
+                )
+                player.save()
+                print(f"➕ Saved: {first} {last} (#{jersey_number})")
+
+            except Exception as e:
+                print(f"❌ Error processing: {player_data} — {e}")
 
 
 
