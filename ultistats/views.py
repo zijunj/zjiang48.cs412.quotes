@@ -21,10 +21,9 @@ from .forms import *
 from .models import *
 from PIL import Image
 from collections import Counter
+from .utils import scrape_college_news
 
 from django.contrib.auth import login
-
-
 
 # Create your views here.
 
@@ -38,6 +37,9 @@ class HomepageView(TemplateView):
         context['total_teams'] = Team.objects.count()
         context['total_players'] = Player.objects.count()
         context['total_games'] = Game.objects.count()
+        
+        # Add scraped news
+        context['college_news'] = scrape_college_news()
         return context
     
 # Signup for a account

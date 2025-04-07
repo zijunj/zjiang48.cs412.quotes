@@ -7,7 +7,16 @@
 <main class="home-container">
     <!-- Welcome Section -->
     <section class="welcome-section">
-        <h1>Welcome to UltiStats</h1>
+        <div class="frisbee-title-wrapper">
+            <!-- Left frisbee -->
+            <img src="{% static 'img/frisbee.png' %}" alt="Frisbee Left" class="frisbee-fly-in-left">
+    
+            <!-- Title -->
+            <h1>Welcome to UltiStats</h1>
+    
+            <!-- Right frisbee -->
+            <img src="{% static 'img/frisbee.png' %}" alt="Frisbee Right" class="frisbee-fly-in-right">
+        </div>
         <p>Explore stats and records of teams, players, and games.</p>
     </section>
 
@@ -15,7 +24,7 @@
     <!-- Stats and Headlines -->
     <div class="stats-headlines-container">
         <!-- Quick Highlights -->
-        <section class="quick-highlights">
+        <section class="quick-highlights fade-in-section">
             <h2>Quick Highlights</h2>
             <ul>
                 <li>Total Teams: {{ total_teams }}</li>
@@ -25,20 +34,20 @@
         </section>
 
         <!-- Headlines -->
-        <section class="headlines">
+        <section class="headlines fade-in-section">
             <h2>Latest College News</h2>
             <ul>
-                <li><a href="https://usaultimate.org/news/2024/08/26549/">2025 U-24 Worlds Player Applications Now Open</a></li>
-                <li><a href="https://usaultimate.org/news/2023/12/competition-working-group-updates/">Competition Working Group Updates</a></li>
-                <li><a href="https://usaultimate.org/news/2023/11/2024-college-championships-awarded-to-milwaukee-madison/">2024 College Championships Awarded to Milwaukee, Madison</a></li>
-                <li><a href="https://usaultimate.org/news/2023/05/usa-ultimate-extends-media-rights-agreement-with-espn/">USA Ultimate Extends Media Rights Agreement with ESPN</a></li>
-                <li><a href="https://usaultimate.org/news/2023/03/usa-ultimate-to-seek-feedback-on-event-hosting-policy-in-light-of-anti-transgender-sports-laws/">USA Ultimate to Seek Feedback on Event Hosting Policy in light of Anti-Transgender Sports Laws</a></li>
+                {% for item in college_news %}
+                <li><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></li>
+                {% empty %}
+                    <li>No news available at the moment.</li>
+                {% endfor %}
             </ul>
         </section>
     </div>
 
     <!-- Videos Section -->
-    <section class="videos-section">
+    <section class="videos-section fade-in-section">
         <h2>Videos to Watch</h2>
         <div class="videos-grid">
             <div class="video-card">
@@ -57,4 +66,24 @@
     </section>
 </main>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const faders = document.querySelectorAll('.fade-in-section');
+
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  faders.forEach(section => {
+    appearOnScroll.observe(section);
+  });
+</script>
 {% endblock %}
